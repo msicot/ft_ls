@@ -6,7 +6,7 @@
 #    By: msicot <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/08 14:13:34 by msicot            #+#    #+#              #
-#    Updated: 2018/02/15 14:09:57 by msicot           ###   ########.fr        #
+#    Updated: 2018/02/15 18:47:51 by msicot           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,13 +18,13 @@ SRC_PATH = ./src/
 OBJ_PATH = ./obj/
 INC_PATH = ./inc/
 
-LS_NAME = ft_ls
+LS_NAME = a.out
 complete = @echo "\033[92mComplete\033[0m"
 cleaning = @echo "\033[92mCleaning complete\033[0m"
 
 CC = gcc
 CFLAGS = -Werror -Wextra -Wall
-NAME = ft_ls
+NAME = libft.a 
 		
 SRC = $(addprefix $(SRC_PATH), $(SRC_NAME)) 
 OBJ = $(addprefix $(OBJ_PATH), $(OBJ_NAME))
