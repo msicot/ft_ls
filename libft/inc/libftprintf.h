@@ -6,7 +6,7 @@
 /*   By: msicot <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/19 13:57:59 by msicot            #+#    #+#             */
-/*   Updated: 2018/02/14 19:13:27 by msicot           ###   ########.fr       */
+/*   Updated: 2018/02/15 13:18:59 by msicot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define _LIBFTPRINTF_H
 # include <stdarg.h>
 # include <stdlib.h>
-# include "libft//libft.h"
+# include "./libft.h"
 # include <limits.h>
 # include <locale.h>
 # include <wchar.h>
