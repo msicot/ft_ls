@@ -6,17 +6,15 @@
 /*   By: msicot <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/15 13:04:10 by msicot            #+#    #+#             */
-/*   Updated: 2018/02/15 13:19:53 by msicot           ###   ########.fr       */
+/*   Updated: 2018/02/15 18:05:04 by msicot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "stdio.h"
-#include "../libft/inc/libft.h"
-#include "../libft/inc/libftprintf.h"
-
 int	main()
 {
-	ft_printf("Hello, this is ls\n");
+	t_dir dir;
+
+	open(".");
 	return (0);
 }
 
