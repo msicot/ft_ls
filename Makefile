@@ -6,11 +6,11 @@
 #    By: msicot <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/08 14:13:34 by msicot            #+#    #+#              #
-#    Updated: 2018/02/15 18:47:51 by msicot           ###   ########.fr        #
+#    Updated: 2018/02/16 17:58:55 by msicot           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-SRC_NAME = ft_ls.c 
+SRC_NAME = ft_ls.c ft_parsing.c ft_print_nf.c 
 	
 OBJ_NAME = $(SRC_NAME:.c=.o)
 
@@ -22,9 +22,10 @@ LS_NAME = a.out
 complete = @echo "\033[92mComplete\033[0m"
 cleaning = @echo "\033[92mCleaning complete\033[0m"
 
+
 CC = gcc
 CFLAGS = -Werror -Wextra -Wall
-NAME = libft.a 
+NAME = a.out 
 		
 SRC = $(addprefix $(SRC_PATH), $(SRC_NAME)) 
 OBJ = $(addprefix $(OBJ_PATH), $(OBJ_NAME))
@@ -39,8 +40,8 @@ $(NAME): $(OBJ)
 
 $(OBJ_PATH)%.o: $(SRC_PATH)%.c
 	@mkdir $(OBJ_PATH) 2> /dev/null || true
-	@echo "Building ft_ls"
 	@$(CC) $(CFLAGS) $(INC) -c $< -o $@
+	@echo "Building ft_ls"
 
 clean :
 	@rm -f $(OBJ)
@@ -55,3 +56,6 @@ fclean : clean
 	@echo "LS has been removed"
 
 re : fclean all
+
+make m : all
+	@./a.out

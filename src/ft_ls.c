@@ -6,7 +6,7 @@
 /*   By: msicot <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/15 13:04:10 by msicot            #+#    #+#             */
-/*   Updated: 2018/02/15 18:49:07 by msicot           ###   ########.fr       */
+/*   Updated: 2018/02/16 19:39:28 by msicot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,33 @@
 
 int	main(int argc, char **argv)
 {
-	DIR	*dir;
-	struct dirent *dent;
-	if (argc == 0)
-		dir = opendir(".");
-	else if (argv[0] != NULL)
+//	struct dirent	*dent;
+//	struct winsize	ws;
+//	DIR				*dp;
+//	t_dir			struc;
+
+	ft_parsing(argc, argv);
+	/*
+	dent = NULL;
+	ioctl(0, TIOCGWINSZ, &ws);
+	struc.col = ws.ws_col;
+	ft_printf("%d argc and %d columns\n", argc, struc.col);
+	if (argc == 1)
 	{
-		dir = opendir(".");
-		if (dir != NULL)
+		dp = opendir(".");
+		if(dp != NULL)
 		{
-			while ((dent = readdir(dir)) != NULL)
-				ft_printf("%s\n",dent->d_name);
+			ft_read_ls(&struc, dent)
+			ft_printf("test\n");
+			while ((dent = readdir(dp)) != NULL)
+				ft_printf("%s\n", dent->d_name);
 		}
 	}
+	else if (argv[0] != NULL)
+	{
+		return (0);
+	}*/
+//	while (1)///;
 	return (0);
 }
 
