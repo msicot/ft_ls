@@ -12,7 +12,7 @@
 
 #include "ft_ls.h"
 
-int			ft_width_ws(void)
+int		ft_width_ws(void)
 {
 	struct winsize	ws;
 
@@ -20,7 +20,7 @@ int			ft_width_ws(void)
 	return (ws.ws_col);
 }
 
-static void	ft_ordered_list(t_name **head)
+static void	ft_order_list(t_name **head)
 {
 	t_name	*n;
 	char	*tmp;
@@ -42,72 +42,59 @@ static void	ft_ordered_list(t_name **head)
 	}
 }
 
-static void	ft_del_list(t_name **head)
-{
-	t_name	*tmp;
-	t_name	*start;
 
-	start = *head;
-	while (start)
-	{
-		tmp = start;;
-		ft_printf("d_name->%s\n", start->d_name);
-		start = start->next;
-		free(tmp);
-	}
-//	tmp = NULL;
-}
-
-static t_name **ft_list_crea(t_name **head, DIR *dp)
+static t_name *ft_list_crea(t_dir *d)
 {
-	t_name			*start;
-	t_name			*tmp;
+	t_name		*head;
+	t_name		*tmp;
+	t_name		*node;
 	struct dirent	*dent;
 
-	if (!(start = (t_name*)malloc(sizeof(t_name))))
+	d->nb_w = 0;
+	if (!(head = ft_create_node()))
 		return (NULL);
-	start->next = NULL;
-	head = &start;
-	if ((dent = readdir(dp)) != NULL)
-	start->d_name = dent->d_name;
-	while ((dent = readdir(dp)) != NULL)
+	if ((dent = readdir(d->dp)) != NULL)
+		head->d_name = dent->d_name;
+	node = head;
+	++d->nb_w;
+	while ((dent = readdir(d->dp)) != NULL)
 	{
-		if (!(tmp = (t_name*)malloc(sizeof(t_name))))
-		return (NULL);
-		start->next = tmp;
-		tmp->d_name = dent->d_name;
+		if ((tmp = ft_create_node()) == NULL)
+			return (NULL);
+		node->next = tmp;
 		tmp->next = NULL;
-		start = tmp;
+		tmp->d_name = dent->d_name;
+		node = node->next;
+		++d->nb_w;
 	}
-	ft_ordered_list(head);
+	node->next = NULL;
+	dent = NULL;
 	return (head);
-
 }
 
 void		ft_print_nf(void)
 {
 	t_dir	stru;
-	t_name	*names;
+	t_name	*head;
 	t_name	*n;
 
+	head = NULL;
 	stru.col = ft_width_ws();
 	stru.dp = opendir(".");
 	if (stru.dp != NULL)
 	{
-		ft_list_crea(&names, stru.dp);
+		head = ft_list_crea(&stru);
 
-		n = names;
+		n = head;
 		while (n != NULL)
 		{
 			ft_printf("%s\n", n->d_name);
 			n = n->next;
 		}
-	//	n = &names;
-	/*	while (n != NULL)
-		{
-			ft_printf("\t%s\n", n->d_name);
-			n = n->next;
-		}*/
-		ft_del_list(&names);
+		
+		ft_order_list(&head);
+		ft_print_line(head, &stru);
+		ft_del_list(&head);
 	}
+	closedir(stru.dp);
 }

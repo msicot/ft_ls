@@ -26,9 +26,14 @@ typedef struct	s_dir
 	char	*path;
 	int		col;
 	DIR		*dp;
-	char	**arg;
-	char	d_namec;
+	char	*d_name;
 	int		nb_f;
+	int	nb_w;
+	int	nb_c;
+	int	len_m;
+	int	width;
+	int	nb_l;
+	char	**t;
 }				t_dir;
 
 typedef struct	s_filename
@@ -39,5 +44,8 @@ typedef struct	s_filename
 void			ft_parsing(int argc, char **tab);
 //void			ft_read_ls(t_dir *struc, struc dirent *dent);
 void			ft_print_nf(void);
-int				ft_width_ws(void);
+int			ft_width_ws(void);
+t_name			*ft_create_node(void);
+void			ft_del_list(t_name **head);
+void			ft_print_line(t_name *head, t_dir *stru);
 #endif

@@ -10,7 +10,7 @@
 #                                                                              #
 # **************************************************************************** #
 
-SRC_NAME = ft_ls.c ft_parsing.c ft_print_nf.c 
+SRC_NAME = ft_ls.c ft_parsing.c ft_print_nf.c ft_list_fx.c ft_println.c
 	
 OBJ_NAME = $(SRC_NAME:.c=.o)
 
@@ -20,7 +20,7 @@ INC_PATH = ./inc/
 
 LS_NAME = a.out
 complete = @echo "\033[92mComplete\033[0m"
-cleaning = @echo "\033[92mCleaning complete\033[0m"
+cleaning = @echo "LS building...\n\033[92mCleaning complete\033[0m"
 
 
 CC = gcc
@@ -41,7 +41,6 @@ $(NAME): $(OBJ)
 $(OBJ_PATH)%.o: $(SRC_PATH)%.c
 	@mkdir $(OBJ_PATH) 2> /dev/null || true
 	@$(CC) $(CFLAGS) $(INC) -c $< -o $@
-	@echo "Building ft_ls"
 
 clean :
 	@rm -f $(OBJ)
