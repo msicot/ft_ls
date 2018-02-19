@@ -1,29 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_parsing.c                                       :+:      :+:    :+:   */
+/*   ft_errors.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: msicot <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/02/16 11:29:51 by msicot            #+#    #+#             */
-/*   Updated: 2018/02/19 12:05:39 by msicot           ###   ########.fr       */
+/*   Created: 2018/02/19 11:41:23 by msicot            #+#    #+#             */
+/*   Updated: 2018/02/19 11:44:41 by msicot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
-void	ft_parsing(int argc, char **tab)
+void	ft_error_flag(char c)
 {
-	t_dir	d;
-
-	d.nb_argc = argc;
-	if (argc == 1)
-	{
-		ft_print_nf();
-	}
-	else
-	{
-		ft_flags(tab, &d);
-
-	}
+	ft_printf("ls: illegal option -- %c\nusage: ls [-Ralrt] [file ...]\n", c);
 }

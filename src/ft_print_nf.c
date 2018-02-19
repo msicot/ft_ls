@@ -6,13 +6,13 @@
 /*   By: msicot <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/16 15:20:45 by msicot            #+#    #+#             */
-/*   Updated: 2018/02/16 20:06:44 by msicot           ###   ########.fr       */
+/*   Updated: 2018/02/19 11:04:52 by msicot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
-int		ft_width_ws(void)
+int				ft_width_ws(void)
 {
 	struct winsize	ws;
 
@@ -20,7 +20,7 @@ int		ft_width_ws(void)
 	return (ws.ws_col);
 }
 
-static void	ft_order_list(t_name **head)
+static void		ft_order_list(t_name **head)
 {
 	t_name	*n;
 	char	*tmp;
@@ -37,17 +37,16 @@ static void	ft_order_list(t_name **head)
 			n->next->d_name = tmp;
 			n = start;
 		}
-		else 
+		else
 			n = n->next;
 	}
 }
 
-
-static t_name *ft_list_crea(t_dir *d)
+static t_name	*ft_list_crea(t_dir *d)
 {
-	t_name		*head;
-	t_name		*tmp;
-	t_name		*node;
+	t_name			*head;
+	t_name			*tmp;
+	t_name			*node;
 	struct dirent	*dent;
 
 	d->nb_w = 0;
@@ -72,7 +71,7 @@ static t_name *ft_list_crea(t_dir *d)
 	return (head);
 }
 
-void		ft_print_nf(void)
+void			ft_print_nf(void)
 {
 	t_dir	stru;
 	t_name	*head;
@@ -84,14 +83,7 @@ void		ft_print_nf(void)
 	if (stru.dp != NULL)
 	{
 		head = ft_list_crea(&stru);
-
 		n = head;
-		while (n != NULL)
-		{
-			ft_printf("%s\n", n->d_name);
-			n = n->next;
-		}
-		
 		ft_order_list(&head);
 		ft_print_line(head, &stru);
 		ft_del_list(&head);
