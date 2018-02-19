@@ -6,20 +6,38 @@
 /*   By: msicot <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/15 13:04:10 by msicot            #+#    #+#             */
-/*   Updated: 2018/02/16 19:39:28 by msicot           ###   ########.fr       */
+/*   Updated: 2018/02/19 17:31:20 by msicot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
+
+void	ft_ls(t_dir d)
+{
+
+}
 
 int	main(int argc, char **argv)
 {
 //	struct dirent	*dent;
 //	struct winsize	ws;
 //	DIR				*dp;
-//	t_dir			struc;
+	t_dir	d;
 
-	ft_parsing(argc, argv);
+	d.nb_argc = argc;
+	d.p = NULL;
+	if (argc == 1)
+	{
+		ft_print_nf(&d);
+		return (0);
+	}
+	else
+	{
+		ft_flags(argv, &d);
+		d.flags = (d.options != 0) ? 1 : 0;
+		ft_ls(d);
+	}
+	ft_freeing(d.p, &d);
 	/*
 	dent = NULL;
 	ioctl(0, TIOCGWINSZ, &ws);

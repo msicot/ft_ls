@@ -6,7 +6,7 @@
 /*   By: msicot <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/19 11:23:52 by msicot            #+#    #+#             */
-/*   Updated: 2018/02/19 13:18:57 by msicot           ###   ########.fr       */
+/*   Updated: 2018/02/19 16:31:34 by msicot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ static void	ft_flag_reset_ls(t_dir *d)
 	d->t2 = 0;
 	d->minus = 1;
 	d->options = 0;
+	d->flags = 0;
 }
 
 static void	ft_retrieve_ls(t_dir *d, char **tab, int i)
@@ -27,6 +28,8 @@ static void	ft_retrieve_ls(t_dir *d, char **tab, int i)
 	int	j;
 
 	j = 1;
+	if (tab[i][j] == '\0')
+		return ;
 	while (tab[i][j] != '\0')
 	{
 		if (tab[i][j] == 'l')
@@ -47,7 +50,6 @@ static void	ft_retrieve_ls(t_dir *d, char **tab, int i)
 		++j;
 	}
 	d->options++;
-
 }
 
 static void	ft_path_retrieve(char **tab, t_dir *d, int i)
@@ -55,6 +57,8 @@ static void	ft_path_retrieve(char **tab, t_dir *d, int i)
 	int j;
 
 	j = 0;
+	if (!(d->p = (char**)malloc(sizeof(char*) * (d->nb_argc - i + 1))))
+		return ;
 	if (d->options == d->nb_argc - 1)
 	{
 		if (!(d->p[j++] = ft_strdup(".")))
@@ -75,22 +79,16 @@ static void	ft_path_retrieve(char **tab, t_dir *d, int i)
 void	ft_flags(char **tab, t_dir *d)
 {
 	int	i;
-	int	j;
 
 	ft_flag_reset_ls(d);
 	i = 1;
-	j = 0;
 	while (i < d->nb_argc)
 	{
-		while (i < d->nb_argc && tab[i][j] == '-')
+		while (i < d->nb_argc && tab[i][0] == '-' && tab[i][1] != '\0')
 		{
 			ft_retrieve_ls(d, tab, i);
 			++i;
 		}
-		if (!(d->p = (char**)malloc(sizeof(char*) *
-						(d->nb_argc - i + 1))))
-			return ;
 		ft_path_retrieve(tab, d, i);
-		break ;
 	}
 }
