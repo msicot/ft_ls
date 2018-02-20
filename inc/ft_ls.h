@@ -6,7 +6,7 @@
 /*   By: msicot <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/15 14:34:12 by msicot            #+#    #+#             */
-/*   Updated: 2018/02/19 17:31:17 by msicot           ###   ########.fr       */
+/*   Updated: 2018/02/20 16:45:09 by msicot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,18 @@
 # include <sys/ioctl.h> /* ioctl TIOCGWINSZ */
 # include <stdlib.h>
 
+typedef struct	s_filename
+{
+	char				*d_name;
+	char				**d_tab;
+	int					d_nb;
+	struct s_filename	*next; 
+}				t_name;
+
 typedef struct	s_dir
 {
 	char	**p;
+	t_name	*head;
 	int		nb_argc;
 	int		col;
 	DIR		*dp;
@@ -42,27 +51,29 @@ typedef struct	s_dir
 	int		a;
 	int		r;
 	int		t2;
+	int		un;
 	int		flags;
 	int		minus;
 	int		options;
+	int		nb_path;
 }				t_dir;
 
-typedef struct	s_filename
-{
-	char				*d_name;
-	struct s_filename	*next; 
-}				t_name;
 //void			ft_parsing(int argc, char **tab);
 //void			ft_read_ls(t_dir *struc, struc dirent *dent);
-void			ft_print_nf(t_dir *d);
+//void			ft_print_nf(t_dir *d);
 int				ft_width_ws(void);
 t_name			*ft_create_node(void);
 void			ft_del_list(t_name **head);
 //void			ft_print_line(t_name *head, t_dir *stru);
 void			ft_flags(char **tab, t_dir *d);
 void			ft_error_flag(char c);
-t_name			*ft_list_crea(t_dir *d);
-void			ft_order_list(t_name **head);
-void			ft_print_list(t_name *head);//, t_dir *d);
+t_name			*create_list(DIR *dir);
+void			order_list(t_name **head);
+void			print_list_basic(t_name *head);//, t_dir *d);
+//void			print_list_0(t_name *head);//, t_dir *d); static ok
 void			ft_freeing(char **tab, t_dir *d);
+void			ft_ls_0(t_dir *d);
+void			ft_ls_no_op(t_dir *d);
+void			ft_ls_gr(t_dir *d);
+t_name			*get_names(char *path);
 #endif

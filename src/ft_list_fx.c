@@ -6,37 +6,51 @@
 /*   By: msicot <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/19 14:34:18 by msicot            #+#    #+#             */
-/*   Updated: 2018/02/19 14:42:34 by msicot           ###   ########.fr       */
+/*   Updated: 2018/02/20 13:48:59 by msicot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
-void	ft_print_list(t_name *head)
+void	print_list_basic(t_name *head)
 {
 	t_name *tmp;
+	int		i;
+
+	tmp = head;
+	i = 0;
+	while (tmp != NULL)
+	{
+		++i;
+		tmp = tmp->next;
+	}
 	tmp = head;
 	while (tmp != NULL)
 	{
-		ft_printf("%s\n", tmp->d_name);
+		--i;
+		if(tmp->d_name[0] != '.')
+		{
+			ft_printf("%s", tmp->d_name);
+			if (i > 0)
+				ft_printf("\n");
+		}
 		tmp = tmp->next;
 	}
 }
-t_name	*ft_list_crea(t_dir *d)
+
+t_name	*create_list(DIR *dir)
 {
 	t_name			*head;
 	t_name			*tmp;
 	t_name			*node;
 	struct dirent	*dent;
 
-	d->nb_w = 0;
 	if (!(head = ft_create_node()))
 		return (NULL);
-	if ((dent = readdir(d->dp)) != NULL)
+	if ((dent = readdir(dir)) != NULL)
 		head->d_name = dent->d_name;
 	node = head;
-	++d->nb_w;
-	while ((dent = readdir(d->dp)) != NULL)
+	while ((dent = readdir(dir)) != NULL)
 	{
 		if ((tmp = ft_create_node()) == NULL)
 			return (NULL);
@@ -44,14 +58,13 @@ t_name	*ft_list_crea(t_dir *d)
 		tmp->next = NULL;
 		tmp->d_name = dent->d_name;
 		node = node->next;
-		++d->nb_w;
 	}
 	node->next = NULL;
 	dent = NULL;
 	return (head);
 }
 
-void		ft_order_list(t_name **head)
+void		order_list(t_name **head)
 {
 	t_name	*n;
 	char	*tmp;

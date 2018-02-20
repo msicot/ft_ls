@@ -6,11 +6,11 @@
 #    By: msicot <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/08 14:13:34 by msicot            #+#    #+#              #
-#    Updated: 2018/02/19 11:40:39 by msicot           ###   ########.fr        #
+#    Updated: 2018/02/20 16:32:48 by msicot           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-SRC_NAME = ft_ls.c ft_parsing.c ft_print_nf.c ft_list_fx.c ft_println.c ft_flags.c ft_errors.c
+SRC_NAME = ft_ls.c ft_parsing.c ft_print_nf.c ft_list_fx.c ft_println.c ft_flags.c ft_errors.c get_names.c ft_ls_0.c ft_ls_recursive.c
 	
 OBJ_NAME = $(SRC_NAME:.c=.o)
 
