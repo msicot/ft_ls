@@ -6,7 +6,7 @@
 /*   By: msicot <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/15 13:04:10 by msicot            #+#    #+#             */
-/*   Updated: 2018/02/20 16:32:03 by msicot           ###   ########.fr       */
+/*   Updated: 2018/02/21 19:16:18 by msicot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,22 +14,28 @@
 
 void	ft_ls_no_op(t_dir *d)
 {
-	int	i;
-	int	j;
+	int		j;
+	t_name	*tmp;
 
-	j = 0;	
-	i = 0;
-	while (i < d->nb_path)
+	j = 0;
+	ft_path_check(&d->path);
+	tmp = d->path;
+	printf("d_name = %s\n", d->path->d_name);
+	while (tmp != NULL)
 	{
-		d->head = get_names(d->p[i]);
-		ft_printf("%s:\n", d->p[i++]);
+		d->head = get_names(tmp->d_name);
+		if (d->nb_path > 1)
+			ft_printf("%s:\n", tmp->d_name);
 		print_list_basic(d->head);
 		if (++j < d->nb_path)	
 			ft_printf("\n\n");
 		else 
 			ft_printf("\n");
 		ft_del_list(&d->head);
+		tmp = tmp->next;
 	}
+	if (d->path != NULL)
+		ft_del_list(&d->path);
 }
 
 int	main(int argc, char **argv)
@@ -37,7 +43,6 @@ int	main(int argc, char **argv)
 	t_dir d;
 
 	d.nb_argc = argc;
-	d.p = NULL;
 	if (argc == 1)
 	{
 		ft_ls_0(&d);
@@ -51,6 +56,6 @@ int	main(int argc, char **argv)
 		else if (d.R == 1)
 			ft_ls_gr(&d);
 	}
-	ft_freeing(d.p, &d);
+//	ft_freeing(d.p, &d);
 	return (0);
 }

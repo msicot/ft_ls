@@ -6,7 +6,7 @@
 /*   By: msicot <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/15 14:34:12 by msicot            #+#    #+#             */
-/*   Updated: 2018/02/20 16:45:09 by msicot           ###   ########.fr       */
+/*   Updated: 2018/02/21 19:24:29 by msicot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,11 @@
 # define _FT_LS_H
 # include "../libft/inc/libft.h"
 # include "../libft/inc/libftprintf.h"
+# include <errno.h>
 # include <sys/types.h>
 # include <sys/dir.h>
 # include <sys/dirent.h>
-# include <sys/types.h>
+# include <sys/stat.h>
 # include <dirent.h>
 # include <sys/ioctl.h> /* ioctl TIOCGWINSZ */
 # include <stdlib.h>
@@ -32,7 +33,7 @@ typedef struct	s_filename
 
 typedef struct	s_dir
 {
-	char	**p;
+	t_name	*path;
 	t_name	*head;
 	int		nb_argc;
 	int		col;
@@ -67,6 +68,7 @@ void			ft_del_list(t_name **head);
 //void			ft_print_line(t_name *head, t_dir *stru);
 void			ft_flags(char **tab, t_dir *d);
 void			ft_error_flag(char c);
+void			ft_err_path(char *s);
 t_name			*create_list(DIR *dir);
 void			order_list(t_name **head);
 void			print_list_basic(t_name *head);//, t_dir *d);
@@ -75,5 +77,7 @@ void			ft_freeing(char **tab, t_dir *d);
 void			ft_ls_0(t_dir *d);
 void			ft_ls_no_op(t_dir *d);
 void			ft_ls_gr(t_dir *d);
+void			ft_path_check(t_name **head);
 t_name			*get_names(char *path);
+t_name			*rm_node(t_name *tmp, char *d_name);
 #endif
