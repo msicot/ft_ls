@@ -6,7 +6,7 @@
 /*   By: msicot <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/20 11:26:18 by msicot            #+#    #+#             */
-/*   Updated: 2018/02/20 11:27:35 by msicot           ###   ########.fr       */
+/*   Updated: 2018/02/22 16:27:04 by msicot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static void	print_list_0(t_name *head)
 	tmp = head;
 	while (tmp != NULL)
 	{
-		if(tmp->d_name[0] != '.')
+		if (tmp->d_name[0] != '.')
 			ft_printf("%s\n", tmp->d_name);
 		tmp = tmp->next;
 	}

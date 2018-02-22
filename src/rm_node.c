@@ -1,29 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_names.c                                        :+:      :+:    :+:   */
+/*   rm_node.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: msicot <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/02/20 09:10:26 by msicot            #+#    #+#             */
-/*   Updated: 2018/02/22 14:50:09 by msicot           ###   ########.fr       */
+/*   Created: 2018/02/22 11:18:24 by msicot            #+#    #+#             */
+/*   Updated: 2018/02/22 11:19:43 by msicot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
-t_name	*get_names(char *path)
+t_name		*rm_node(t_name *currPtr, char *value)
 {
-	DIR		*dir;
-	t_name	*head;
+	t_name	*nextPtr;
 
-	head = NULL;
-	dir = opendir(path);
-	if (dir != NULL)
+	if (currPtr == NULL)
+		return (NULL);
+	if (currPtr->d_name == value)
 	{
-		head = create_list(dir);
-		order_list(&head);
-		closedir(dir);
+		nextPtr = currPtr->next;
+		free(currPtr);
+		return (nextPtr);
 	}
-	return (head);
+	currPtr->next = rm_node(currPtr->next, value);
+	return (currPtr);
 }

@@ -6,7 +6,7 @@
 /*   By: msicot <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/19 11:23:52 by msicot            #+#    #+#             */
-/*   Updated: 2018/02/21 12:18:24 by msicot           ###   ########.fr       */
+/*   Updated: 2018/02/22 13:54:27 by msicot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,23 +31,24 @@ static void		ft_retrieve_flags(t_dir *d, char **tab, int i, int j)
 		return ;
 	while (tab[i][j] != '\0')
 	{
-		if (tab[i][j++] == 'l')
+		if (tab[i][j] == 'l')
 			d->l = 1;
-		else if (tab[i][j++] == 'R')
+		else if (tab[i][j] == 'R')
 			d->R = 1;
-		else if (tab[i][j++] == 'a')
+		else if (tab[i][j] == 'a')
 			d->a = 1;
-		else if (tab[i][j++] == 'r')
+		else if (tab[i][j] == 'r')
 			d->r = 1;
-		else if (tab[i][j++] == 't')
+		else if (tab[i][j] == 't')
 			d->t2 = 1;
-		else if (tab[i][j++] == '0')
+		else if (tab[i][j] == '0')
 			d->un = 1;
 		else
 		{
 			ft_error_flag(tab[i][j]);
 			break ;
 		}
+		++j;
 	}
 	d->options++;
 }
@@ -98,5 +99,6 @@ void			ft_flags(char **tab, t_dir *d)
 		}
 		d->path = ft_path_retrieve(tab, d, i);
 		order_list(&d->path);
+	//	ft_printf("SEGF BAL ft_flags 2\n");
 	}
 }
