@@ -6,7 +6,7 @@
 /*   By: msicot <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/15 14:34:12 by msicot            #+#    #+#             */
-/*   Updated: 2018/02/22 16:23:03 by msicot           ###   ########.fr       */
+/*   Updated: 2018/02/23 10:05:53 by msicot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ typedef struct	s_dir
 int				ft_width_ws(void);
 t_name			*ft_create_node(void);
 void			ft_del_list(t_name **head);
+void			ft_del_listp(t_name **head);
 //void			ft_print_line(t_name *head, t_dir *stru);
 void			ft_flags(char **tab, t_dir *d);
 void			ft_error_flag(char c);

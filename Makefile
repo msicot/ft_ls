@@ -6,11 +6,11 @@
 #    By: msicot <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/08 14:13:34 by msicot            #+#    #+#              #
-#    Updated: 2018/02/22 11:19:35 by msicot           ###   ########.fr        #
+#    Updated: 2018/02/23 10:26:53 by msicot           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-SRC_NAME = ft_ls.c ft_parsing.c ft_print_nf.c ft_list_fx.c ft_println.c ft_flags.c ft_errors.c get_names.c ft_ls_0.c ft_ls_recursive.c ft_path_check.c rm_node.c
+SRC_NAME = ft_ls.c ft_parsing.c ft_print_nf.c ft_list_fx.c ft_println.c ft_flags.c ft_errors.c get_names.c ft_ls_0.c ft_ls_recursive.c ft_path_check.c rm_node.c ft_listp.c
 	
 OBJ_NAME = $(SRC_NAME:.c=.o)
 
@@ -18,14 +18,14 @@ SRC_PATH = ./src/
 OBJ_PATH = ./obj/
 INC_PATH = ./inc/
 
-LS_NAME = a.out
+LS_NAME = ft_ls
 complete = @echo "\033[92mComplete\033[0m"
 cleaning = @echo "LS building...\n\033[92mCleaning complete\033[0m"
 
 
 CC = gcc
 CFLAGS = -Werror -Wextra -Wall
-NAME = a.out 
+NAME = ft_ls
 		
 SRC = $(addprefix $(SRC_PATH), $(SRC_NAME)) 
 OBJ = $(addprefix $(OBJ_PATH), $(OBJ_NAME))

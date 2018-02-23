@@ -6,7 +6,7 @@
 /*   By: msicot <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/20 15:30:25 by msicot            #+#    #+#             */
-/*   Updated: 2018/02/22 16:58:19 by msicot           ###   ########.fr       */
+/*   Updated: 2018/02/23 12:10:38 by msicot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,34 +55,30 @@ static void	ft_recursive(char *path)
 	t_name	*tmp;
 	DIR		*dir;
 
-	dir = opendir(path);
+	ft_printf("\tft_recursive(%s)\n", path);
 
-//	ft_printf("BALISE SEGF FT_RECURSIVE 0 name\n");
+	if ((dir = opendir(path)) == NULL)
+			return ;
 	head = get_names2(dir, path);
-//	ft_printf("BALISE SEGF FT_RECURSIVE 0.6 name\n");
 	tmp = head;
 	print_list_basic(head);
-	ft_printf("\n");
-//	ft_printf("BALISE SEGF FT_RECURSIVE 1 name\n");
+	ft_printf("\n\n");
 	while (tmp != NULL && tmp->d_name != NULL)
 	{
-	//	ft_printf("\ttmp->d_name->%s\n",tmp->d_name);
-	//	ft_printf("\tIS_DIR=%d<- IS_POINT=%d\n", ft_is_dir(tmp->d_name), ft_is_point(tmp->d_name));
+		ft_printf("\tname =%s\n", tmp->d_name);
 		if (ft_is_dir(tmp->path) == 1 && ft_is_point(tmp->d_name) == 0)
 		{
-//			ft_printf("\t\tIS_DIR\n");
-//			ft_printf("./%s:\n",tmp->d_name);
+			ft_printf("\t%s ->IS_DIR\n", tmp->d_name);
+			ft_printf("\tpath->%s\n", tmp->path);
+			ft_printf("%s:\n",tmp->path);
 			ft_recursive(tmp->path);
-			ft_printf("\n");
 		}
 		tmp = tmp->next;
 	}
 	if (dir != NULL)
 	closedir(dir);
-//	ft_printf("BALISE SEGF FT_RECURSIVE 3\n");
 	if (head != NULL)
-		ft_del_list(&head);
-//	ft_printf("BALISE SEGF FT_RECURSIVE 4\n");
+		ft_del_listp(&head);
 }
 
 void	ft_ls_gr(t_dir *d)
