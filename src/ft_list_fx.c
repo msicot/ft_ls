@@ -6,7 +6,7 @@
 /*   By: msicot <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/19 14:34:18 by msicot            #+#    #+#             */
-/*   Updated: 2018/02/23 10:04:34 by msicot           ###   ########.fr       */
+/*   Updated: 2018/02/27 16:57:15 by msicot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,24 +47,22 @@ t_name	*create_list(DIR *dir)
 	t_name			*node;
 	struct dirent	*dent;
 
-	if (!(head = ft_create_node()))
-		return (NULL);
+	head = NULL;
+	tmp = NULL;
+	node = NULL;
 	if ((dent = readdir(dir)) != NULL)
-		head->d_name = dent->d_name;
-	node = head;
-	node->path = NULL;
+	{
+		if (!(node = ft_create_node(dent->d_name)))
+			return (NULL);
+	}
+	head = node;
+	tmp = node;
 	while ((dent = readdir(dir)) != NULL)
 	{
-		if ((tmp = ft_create_node()) == NULL)
+		if ((tmp->next = ft_create_node(dent->d_name)) == NULL)
 			return (NULL);
-		node->next = tmp;
-		tmp->next = NULL;
-		tmp->d_name = dent->d_name;
-		tmp->path = NULL;
-		node = node->next;
+		tmp = tmp->next;
 	}
-	node->next = NULL;
-	dent = NULL;
 	return (head);
 }
 
@@ -100,18 +98,21 @@ void	ft_del_list(t_name **head)
 	start = *head;
 	while (start)
 	{
-		tmp = start;;
+		ft_strdel(&start->d_name);
+		tmp = start;
 		start = start->next;
 		free(tmp);
 	}
 }
 
-t_name	*ft_create_node(void)
+t_name	*ft_create_node(char *str)
 {
 	t_name	*node;
 
 	if (!(node = (t_name*)malloc(sizeof(t_name))))
 		return (NULL);
+	node->d_name = ft_strdup(str);
+	//node->d_name = str;
 	node->next = NULL; 
 	return (node);
 }

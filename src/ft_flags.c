@@ -6,7 +6,7 @@
 /*   By: msicot <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/19 11:23:52 by msicot            #+#    #+#             */
-/*   Updated: 2018/02/22 13:54:27 by msicot           ###   ########.fr       */
+/*   Updated: 2018/02/27 17:01:56 by msicot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,18 +62,18 @@ static t_name	*ft_path_retrieve(char **tab, t_dir *d, int i)
 	head = NULL;
 	if (d->nb_argc > i)
 	{
-		if (!(head = ft_create_node()))
+		if (!(head = ft_create_node(tab[i++])))
 			return (NULL);
 		node = head;
-		node->d_name = tab[i++];
+	//	node->d_name = tab[i++];
 		d->nb_path++;
 		while (i < d->nb_argc)
 		{
-			if ((tmp = ft_create_node()) == NULL)
+			if ((tmp = ft_create_node(tab[i++])) == NULL)
 				return (NULL);
 			node->next = tmp;
-			tmp->next = NULL;
-			tmp->d_name = tab[i++];
+//			tmp->next = NULL;
+//			tmp->d_name = tab[i++];
 			node = node->next;
 			d->nb_path++;
 		}

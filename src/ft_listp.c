@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   list_path.c                                        :+:      :+:    :+:   */
+/*   ft_listp.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: msicot <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/02/23 10:03:43 by msicot            #+#    #+#             */
-/*   Updated: 2018/02/23 10:04:51 by msicot           ###   ########.fr       */
+/*   Created: 2018/02/27 10:31:39 by msicot            #+#    #+#             */
+/*   Updated: 2018/02/27 16:42:54 by msicot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,9 @@ void	ft_del_listp(t_name **head)
 	start = *head;
 	while (start)
 	{
-		tmp = start;;
+		tmp = start;
 		ft_strdel(&tmp->path);
+		ft_strdel(&tmp->d_name);
 		start = start->next;
 		free(tmp);
 	}
@@ -33,16 +34,19 @@ static void	ft_path_name(t_name **node, char *path)
 	char	*slash;
 	char	*bin;
 
+	if (path == NULL)
+		return ;
 	if (!(slash = ft_strdup("/")))
 		return ;
 	tmp = *node;
 	while (tmp != NULL)
 	{
-		bin = tmp->path;
+	//	bin = tmp->path;
 		tmp->path = ft_strjoin(path, slash);
 		bin = tmp->path;
 		tmp->path = ft_strjoin(tmp->path, tmp->d_name);
 		ft_strdel(&bin);
+	//	ft_printf("name=%s\t\tpath=%s\n", tmp->d_name, tmp->path);
 		tmp = tmp->next;
 	}
 	ft_strdel(&slash);
@@ -57,23 +61,22 @@ t_name	*create_list_path(DIR *dir, char *path)
 	t_name			*node;
 	struct dirent	*dent;
 
-	if (!(head = ft_create_node()))
-		return (NULL);
+	head = NULL;
+	tmp = NULL;
+	node = NULL;
 	if ((dent = readdir(dir)) != NULL)
-		head->d_name = dent->d_name;
-	node = head;
+	{
+		if (!(node = ft_create_node(dent->d_name)))
+			return (NULL);
+	}
+	head = node;
+	tmp = node;
 	while ((dent = readdir(dir)) != NULL)
 	{
-		if ((tmp = ft_create_node()) == NULL)
+		if ((tmp->next = ft_create_node(dent->d_name)) == NULL)
 			return (NULL);
-		node->next = tmp;
-		tmp->next = NULL;
-		tmp->d_name = dent->d_name;
-		node = node->next;
-		//	ft_printf("create list path \n");
+		tmp = tmp->next;;
 	}
-	node->next = NULL;
-	dent = NULL;
 	ft_path_name(&head, path);
 	//	ft_printf("test %s<-\n", head->path);
 	return (head);

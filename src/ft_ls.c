@@ -6,7 +6,7 @@
 /*   By: msicot <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/15 13:04:10 by msicot            #+#    #+#             */
-/*   Updated: 2018/02/22 16:33:28 by msicot           ###   ########.fr       */
+/*   Updated: 2018/02/27 16:53:01 by msicot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,8 @@ void	ft_ls_no_op(t_dir *d)
 	tmp = d->path;
 	while (tmp != NULL && tmp->d_name != NULL)
 	{
-		d->head = get_names(tmp->d_name);
+		if (!(d->head = get_names(tmp->d_name)))
+			return ;
 		if (d->nb_path > 1)
 			ft_printf("%s:\n", tmp->d_name);
 		print_list_basic(d->head);
@@ -30,11 +31,12 @@ void	ft_ls_no_op(t_dir *d)
 			ft_printf("\n\n");
 		else 
 			ft_printf("\n");
-		ft_del_list(&d->head);
 		tmp = tmp->next;
 	}
 	if (d->path != NULL)
 		ft_del_list(&d->path);
+	if(d->head != NULL)	
+		ft_del_list(&d->head);
 }
 
 int	main(int argc, char **argv)

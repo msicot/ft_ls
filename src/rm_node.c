@@ -6,24 +6,25 @@
 /*   By: msicot <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/22 11:18:24 by msicot            #+#    #+#             */
-/*   Updated: 2018/02/22 11:19:43 by msicot           ###   ########.fr       */
+/*   Updated: 2018/02/27 17:04:50 by msicot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
-t_name		*rm_node(t_name *currPtr, char *value)
+t_name		*rm_node(t_name *currptr, char *value)
 {
-	t_name	*nextPtr;
+	t_name	*nextptr;
 
-	if (currPtr == NULL)
+	if (currptr == NULL)
 		return (NULL);
-	if (currPtr->d_name == value)
+	if (currptr->d_name == value)
 	{
-		nextPtr = currPtr->next;
-		free(currPtr);
-		return (nextPtr);
+		nextptr = currptr->next;
+		ft_strdel(&currptr->d_name);
+		free(currptr);
+		return (nextptr);
 	}
-	currPtr->next = rm_node(currPtr->next, value);
-	return (currPtr);
+	currptr->next = rm_node(currptr->next, value);
+	return (currptr);
 }

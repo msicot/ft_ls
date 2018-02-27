@@ -6,7 +6,7 @@
 /*   By: msicot <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/20 09:10:26 by msicot            #+#    #+#             */
-/*   Updated: 2018/02/22 14:50:09 by msicot           ###   ########.fr       */
+/*   Updated: 2018/02/27 12:10:28 by msicot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,9 @@ t_name	*get_names(char *path)
 	t_name	*head;
 
 	head = NULL;
-	dir = opendir(path);
-	if (dir != NULL)
+	if (!(dir = opendir(path)))
+		return (NULL);
+	else
 	{
 		head = create_list(dir);
 		order_list(&head);

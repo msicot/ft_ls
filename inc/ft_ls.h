@@ -6,7 +6,7 @@
 /*   By: msicot <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/15 14:34:12 by msicot            #+#    #+#             */
-/*   Updated: 2018/02/23 10:05:53 by msicot           ###   ########.fr       */
+/*   Updated: 2018/02/27 15:27:16 by msicot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ typedef struct	s_dir
 //void			ft_read_ls(t_dir *struc, struc dirent *dent);
 //void			ft_print_nf(t_dir *d);
 int				ft_width_ws(void);
-t_name			*ft_create_node(void);
+t_name			*ft_create_node(char *str);
 void			ft_del_list(t_name **head);
 void			ft_del_listp(t_name **head);
 //void			ft_print_line(t_name *head, t_dir *stru);
