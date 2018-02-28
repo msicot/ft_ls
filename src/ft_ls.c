@@ -6,7 +6,7 @@
 /*   By: msicot <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/15 13:04:10 by msicot            #+#    #+#             */
-/*   Updated: 2018/02/27 16:53:01 by msicot           ###   ########.fr       */
+/*   Updated: 2018/02/28 17:31:55 by msicot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ void	ft_ls_no_op(t_dir *d)
 	t_name	*tmp;
 
 	j = 0;
-	ft_path_check(d);
 	tmp = d->path;
 	while (tmp != NULL && tmp->d_name != NULL)
 	{
@@ -32,16 +31,17 @@ void	ft_ls_no_op(t_dir *d)
 		else 
 			ft_printf("\n");
 		tmp = tmp->next;
+		if(d->head != NULL)	
+			ft_del_list(&d->head);
 	}
 	if (d->path != NULL)
 		ft_del_list(&d->path);
-	if(d->head != NULL)	
-		ft_del_list(&d->head);
 }
+
 
 int	main(int argc, char **argv)
 {
-	t_dir d;
+	t_dir	d;
 
 	d.nb_argc = argc;
 	if (argc == 1)
@@ -53,6 +53,7 @@ int	main(int argc, char **argv)
 	{
 	//	ft_printf("SEGF BALISE Main 1\n");
 		ft_flags(argv, &d);
+		ft_path_check(&d);
 	//	ft_printf("SEGF BALISE Main 2\n");
 		if (d.options == 0)
 			ft_ls_no_op(&d);
