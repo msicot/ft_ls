@@ -6,7 +6,7 @@
 /*   By: msicot <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/20 14:27:27 by msicot            #+#    #+#             */
-/*   Updated: 2018/02/28 18:07:04 by msicot           ###   ########.fr       */
+/*   Updated: 2018/02/28 18:16:48 by msicot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,15 @@ void	ft_rm_files(t_dir *d)
 		ft_printf("\n");
 }
 
+static void	ft_check_dash1(t_dir *d)
+{
+	if (ft_strcmp(d->path->d_name, "--") == 0)
+	{
+			d->path = rm_node(d->path, d->path->d_name);
+			--d->nb_path;
+	}
+}
+
 void	ft_path_check(t_dir *d)
 {
 	struct stat	sb;
@@ -46,11 +55,7 @@ void	ft_path_check(t_dir *d)
 
 	if (d->path == NULL)
 		return ;
-	if (ft_strcmp(d->path->d_name, "--") == 0)
-	{
-			d->path = rm_node(d->path, d->path->d_name);
-			--d->nb_path;
-	}
+	ft_check_dash1(d);
 	tmp = d->path;
 	while (tmp != NULL)
 	{

@@ -6,7 +6,7 @@
 /*   By: msicot <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/15 14:34:12 by msicot            #+#    #+#             */
-/*   Updated: 2018/02/28 15:41:46 by msicot           ###   ########.fr       */
+/*   Updated: 2018/02/28 18:31:02 by msicot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,8 @@ t_name			*create_list_path(DIR *dir, char *path);
 void			order_list(t_name **head);
 void			order_list_p(t_name **head);
 void			ft_merge_sort(t_name **head_ref);
-void			print_list_basic(t_name *head);//, t_dir *d);
+void			print_list_basic(t_name *head, int hidden);//, t_dir *d);
+void			ft_printl(t_name *head, t_dir *d);//, t_dir *d);
 //void			print_list_0(t_name *head);//, t_dir *d); static ok
 void			ft_freeing(char **tab, t_dir *d);
 void			ft_ls_0(t_dir *d);

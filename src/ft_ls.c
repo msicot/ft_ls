@@ -6,7 +6,7 @@
 /*   By: msicot <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/15 13:04:10 by msicot            #+#    #+#             */
-/*   Updated: 2018/02/28 17:31:55 by msicot           ###   ########.fr       */
+/*   Updated: 2018/02/28 18:34:58 by msicot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	ft_ls_no_op(t_dir *d)
 			return ;
 		if (d->nb_path > 1)
 			ft_printf("%s:\n", tmp->d_name);
-		print_list_basic(d->head);
+		ft_printl(d->head, d);
 		if (++j < d->nb_path)	
 			ft_printf("\n\n");
 		else 

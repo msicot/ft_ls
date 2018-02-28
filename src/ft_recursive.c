@@ -6,7 +6,7 @@
 /*   By: msicot <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/20 15:30:25 by msicot            #+#    #+#             */
-/*   Updated: 2018/02/28 18:07:22 by msicot           ###   ########.fr       */
+/*   Updated: 2018/02/28 18:30:01 by msicot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ static void	ft_recursive(char *path, t_dir *d)
 	if ((head = get_names2(path)) == NULL)
 		return ;
 	tmp = head;
-	print_list_basic(head);
+	ft_printl(head, d);
 	ft_printf("\n");
 	while (tmp != NULL && tmp->d_name != NULL)
 	{
