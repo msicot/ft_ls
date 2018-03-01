@@ -6,7 +6,7 @@
 /*   By: msicot <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/19 11:23:52 by msicot            #+#    #+#             */
-/*   Updated: 2018/03/01 17:34:28 by msicot           ###   ########.fr       */
+/*   Updated: 2018/03/01 18:20:07 by msicot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,6 @@ static void		ft_flag_reset_ls(t_dir *d)
 	d->options = 0;
 	d->un = 0;
 	d->flags = 0;
-	d->u_pad = 0;
-	d->gr_pad = 0;
-	d->sz_pad = 0;
-	d->ln_pad = 0;
 }
 
 static int		ft_ret_flags(t_dir *d, char c)
