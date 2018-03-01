@@ -6,24 +6,26 @@
 /*   By: msicot <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/28 11:19:40 by msicot            #+#    #+#             */
-/*   Updated: 2018/02/28 14:57:10 by msicot           ###   ########.fr       */
+/*   Updated: 2018/03/01 17:20:15 by msicot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
-static void	fbsplit(t_name *source, t_name **front_r, t_name **back_r)
+static void		ft_need(t_name *s, t_name **f, t_name **b)
+{
+	f = &s;
+	(b) = NULL;
+}
+
+static void		fbsplit(t_name *source, t_name **front_r, t_name **back_r)
 {
 	t_name	*fast;
 	t_name	*slow;
 
 	slow = NULL;
-	fast = NULL;
 	if (source == NULL || source->next == NULL)
-	{
-		*front_r = source;
-		*back_r = NULL;
-	}
+		ft_need(source, front_r, back_r);
 	else
 	{
 		slow = source;
@@ -57,7 +59,7 @@ static t_name	*sortedmerge(t_name *a, t_name *b)
 		result = a;
 		result->next = sortedmerge(a->next, b);
 	}
-	else 
+	else
 	{
 		result = b;
 		result->next = sortedmerge(a, b->next);
@@ -65,7 +67,7 @@ static t_name	*sortedmerge(t_name *a, t_name *b)
 	return (result);
 }
 
-void	ft_merge_sort(t_name **head_ref)
+void			ft_merge_sort(t_name **head_ref)
 {
 	t_name	*head;
 	t_name	*a;
@@ -79,4 +81,3 @@ void	ft_merge_sort(t_name **head_ref)
 	ft_merge_sort(&b);
 	*head_ref = sortedmerge(a, b);
 }
-

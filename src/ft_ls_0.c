@@ -6,7 +6,7 @@
 /*   By: msicot <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/20 11:26:18 by msicot            #+#    #+#             */
-/*   Updated: 2018/02/22 16:27:04 by msicot           ###   ########.fr       */
+/*   Updated: 2018/03/01 17:30:29 by msicot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 static void	print_list_0(t_name *head)
 {
 	t_name *tmp;
+
 	tmp = head;
 	while (tmp != NULL)
 	{
@@ -24,7 +25,7 @@ static void	print_list_0(t_name *head)
 	}
 }
 
-void	ft_ls_0(t_dir *d)
+void		ft_ls_0(t_dir *d)
 {
 	t_name	*head;
 	int		i;
@@ -34,5 +35,3 @@ void	ft_ls_0(t_dir *d)
 	print_list_0(head);
 	ft_del_list(&head);
 }
-
-

@@ -6,7 +6,7 @@
 /*   By: msicot <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/20 15:30:25 by msicot            #+#    #+#             */
-/*   Updated: 2018/03/01 11:03:24 by msicot           ###   ########.fr       */
+/*   Updated: 2018/03/01 17:08:14 by msicot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ static int	ft_is_dir(char *f_name)
 
 	if (lstat(f_name, &sb) == 0)
 	{
-	//	ft_printf("\t\tout put ?\n");
 		if (S_ISDIR(sb.st_mode))
 			return (1);
 	}
@@ -52,7 +51,7 @@ static void	ft_recursive(char *path, t_dir *d)
 	{
 		if (ft_is_dir(tmp->path) == 1 && ft_is_point(tmp->d_name) == 0)
 		{
-			ft_printf("\n%s:\n",tmp->path);
+			ft_printf("\n%s:\n", tmp->path);
 			ft_recursive(tmp->path, d);
 		}
 		tmp = tmp->next;
@@ -61,7 +60,7 @@ static void	ft_recursive(char *path, t_dir *d)
 		ft_del_listp(&head);
 }
 
-void	ft_ls_gr(t_dir *d)
+void		ft_ls_gr(t_dir *d)
 {
 	t_name	*tmp;
 	int		i;
@@ -73,7 +72,7 @@ void	ft_ls_gr(t_dir *d)
 	while (tmp != NULL && tmp->d_name != NULL)
 	{
 		if (d->nb_argc > 1 && i > 1)
-			ft_printf("%s:\n",tmp->d_name);
+			ft_printf("%s:\n", tmp->d_name);
 		ft_recursive(tmp->d_name, d);
 		if (i++ < d->nb_path)
 			ft_printf("\n");

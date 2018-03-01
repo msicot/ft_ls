@@ -6,7 +6,7 @@
 /*   By: msicot <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/15 13:04:10 by msicot            #+#    #+#             */
-/*   Updated: 2018/03/01 14:46:08 by msicot           ###   ########.fr       */
+/*   Updated: 2018/03/01 17:28:39 by msicot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,20 +28,19 @@ void	ft_ls_no_op(t_dir *d)
 		if (d->nb_path > 1)
 			ft_printf("%s:\n", d->path->d_name);
 		ft_printl(&d->head, d);
-		if (++j < d->nb_path)	
+		if (++j < d->nb_path)
 			ft_printf("\n\n");
-		else 
+		else
 			ft_printf("\n");
 		d->path = d->path->next;
-		if(d->head != NULL)	
+		if (d->head != NULL)
 			ft_del_listp(&d->head);
 	}
 	if (d->path != NULL)
 		ft_del_list(&tmp);
 }
 
-
-int	main(int argc, char **argv)
+int		main(int argc, char **argv)
 {
 	t_dir	d;
 
@@ -53,10 +52,8 @@ int	main(int argc, char **argv)
 	}
 	else
 	{
-//		ft_printf("SEGF BALISE Main 1\n");
 		ft_flags(argv, &d);
 		ft_path_check(&d);
-//		ft_printf("SEGF BALISE Main 2\n");
 		if (d.R == 1)
 			ft_ls_gr(&d);
 		else

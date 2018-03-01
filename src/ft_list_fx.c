@@ -6,7 +6,7 @@
 /*   By: msicot <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/19 14:34:18 by msicot            #+#    #+#             */
-/*   Updated: 2018/02/28 18:18:56 by msicot           ###   ########.fr       */
+/*   Updated: 2018/03/01 17:26:09 by msicot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ t_name	*create_list(DIR *dir)
 	return (head);
 }
 
-void		order_list(t_name **head)
+void	order_list(t_name **head)
 {
 	t_name	*n;
 	char	*tmp;
@@ -84,7 +84,6 @@ t_name	*ft_create_node(char *str)
 	if (!(node = (t_name*)malloc(sizeof(t_name))))
 		return (NULL);
 	node->d_name = ft_strdup(str);
-	//node->d_name = str;
-	node->next = NULL; 
+	node->next = NULL;
 	return (node);
 }

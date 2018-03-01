@@ -6,7 +6,7 @@
 /*   By: msicot <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/15 14:34:12 by msicot            #+#    #+#             */
-/*   Updated: 2018/03/01 16:10:36 by msicot           ###   ########.fr       */
+/*   Updated: 2018/03/01 17:36:44 by msicot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,10 @@ typedef struct	s_dir
 	int		minus;
 	int		options;
 	int		nb_path;
+	int		u_pad;
+	int		gr_pad;
+	int		sz_pad;
+	int		ln_pad;
 }				t_dir;
 
 //void			ft_parsing(int argc, char **tab);

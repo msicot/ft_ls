@@ -6,7 +6,7 @@
 /*   By: msicot <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/01 11:17:20 by msicot            #+#    #+#             */
-/*   Updated: 2018/03/01 16:15:11 by msicot           ###   ########.fr       */
+/*   Updated: 2018/03/01 17:10:30 by msicot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 char	*filetype(struct stat *sb)
 {
-
 	if (S_ISREG(sb->st_mode))
 		return ("-");
 	if (S_ISDIR(sb->st_mode))
@@ -66,5 +65,16 @@ char	*perm(struct stat *sb)
 	str[i++] = (sb->st_mode & S_IROTH) ? 'r' : '-';
 	str[i++] = (sb->st_mode & S_IWOTH) ? 'w' : '-';
 	str[i++] = (sb->st_mode & S_IXOTH) ? 'x' : '-';
+	return (str);
+}
+
+char	*time_info(struct stat *sb)
+{
+	char		*str;
+
+	if (!(str = ctime(&sb->st_mtime)))
+		return (NULL);
+	str = ft_strncpy(str, &str[4], ft_strlen(str));
+	ft_bzero(&str[ft_strlen(str) - 9], 9);
 	return (str);
 }

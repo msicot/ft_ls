@@ -6,13 +6,13 @@
 /*   By: msicot <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/20 14:27:27 by msicot            #+#    #+#             */
-/*   Updated: 2018/03/01 13:08:03 by msicot           ###   ########.fr       */
+/*   Updated: 2018/03/01 17:22:41 by msicot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
-void	ft_rm_files(t_dir *d)
+void		ft_rm_files(t_dir *d)
 {
 	t_name		*tmp;
 	struct stat	sb;
@@ -43,12 +43,12 @@ static void	ft_check_dash1(t_dir *d)
 {
 	if (ft_strcmp(d->path->d_name, "--") == 0)
 	{
-			d->path = rm_node(d->path, d->path->d_name);
-			--d->nb_path;
+		d->path = rm_node(d->path, d->path->d_name);
+		--d->nb_path;
 	}
 }
 
-void	ft_path_check(t_dir *d)
+void		ft_path_check(t_dir *d)
 {
 	struct stat	sb;
 	t_name		*tmp;
