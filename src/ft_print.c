@@ -6,7 +6,7 @@
 /*   By: msicot <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/28 18:19:05 by msicot            #+#    #+#             */
-/*   Updated: 2018/02/28 18:31:08 by msicot           ###   ########.fr       */
+/*   Updated: 2018/03/01 14:44:05 by msicot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,10 @@ void	print_list_basic(t_name *head, int hidden)
 	}
 }
 
-void	ft_printl(t_name *head, t_dir *d)
+void	ft_printl(t_name **head, t_dir *d)
 {
-	print_list_basic(head, d->a);
+	if (d->l == 0)
+		print_list_basic(*head, d->a);
+	else
+		ft_option_l(head, d);
 }

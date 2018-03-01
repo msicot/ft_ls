@@ -6,7 +6,7 @@
 /*   By: msicot <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/20 09:10:26 by msicot            #+#    #+#             */
-/*   Updated: 2018/02/28 15:34:40 by msicot           ###   ########.fr       */
+/*   Updated: 2018/03/01 14:29:45 by msicot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,3 +28,20 @@ t_name	*get_names(char *path)
 	}
 	return (head);
 }
+
+t_name	*get_names2(char *path)
+{
+	t_name	*head;
+	DIR		*dir;
+
+	if ((dir = opendir(path)) == NULL)
+		return (NULL);
+	else
+	{
+		head = create_list_path(dir, path);
+		ft_merge_sort(&head);
+		closedir(dir);
+	}
+	return (head);
+}
+

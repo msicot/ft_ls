@@ -6,7 +6,7 @@
 /*   By: msicot <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/20 14:27:27 by msicot            #+#    #+#             */
-/*   Updated: 2018/02/28 18:16:48 by msicot           ###   ########.fr       */
+/*   Updated: 2018/03/01 13:08:03 by msicot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,12 +65,11 @@ void	ft_path_check(t_dir *d)
 		}
 		else
 		{
-			if (ft_strcmp(tmp->d_name, "--") == 0)
-				--d->nb_path;
 			ft_printf("ls: ");
 			perror(tmp->d_name);
 			d->path = rm_node(d->path, tmp->d_name);
 			tmp = d->path;
+			--d->nb_path;
 		}
 	}
 	ft_merge_sort(&d->path);

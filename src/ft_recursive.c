@@ -6,7 +6,7 @@
 /*   By: msicot <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/20 15:30:25 by msicot            #+#    #+#             */
-/*   Updated: 2018/02/28 18:30:01 by msicot           ###   ########.fr       */
+/*   Updated: 2018/03/01 11:03:24 by msicot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,22 +23,6 @@ static int	ft_is_dir(char *f_name)
 			return (1);
 	}
 	return (0);
-}
-
-static	t_name	*get_names2(char *path)
-{
-	t_name	*head;
-	DIR		*dir;
-
-	if ((dir = opendir(path)) == NULL)
-		return (NULL);
-	else 
-	{
-		head = create_list_path(dir, path);
-		ft_merge_sort(&head);
-		closedir(dir);
-	}
-	return (head);
 }
 
 static int	ft_is_point(char *value)
@@ -62,11 +46,10 @@ static void	ft_recursive(char *path, t_dir *d)
 	if ((head = get_names2(path)) == NULL)
 		return ;
 	tmp = head;
-	ft_printl(head, d);
+	ft_printl(&head, d);
 	ft_printf("\n");
 	while (tmp != NULL && tmp->d_name != NULL)
 	{
-
 		if (ft_is_dir(tmp->path) == 1 && ft_is_point(tmp->d_name) == 0)
 		{
 			ft_printf("\n%s:\n",tmp->path);
@@ -84,12 +67,13 @@ void	ft_ls_gr(t_dir *d)
 	int		i;
 
 	i = 1;
-	if (d->path == NULL)
+	if (d->path == NULL && d->nb_path == 0)
 		d->path = ft_create_node(".");
 	tmp = d->path;
 	while (tmp != NULL && tmp->d_name != NULL)
 	{
-		ft_printf("%s:\n",tmp->d_name);
+		if (d->nb_argc > 1 && i > 1)
+			ft_printf("%s:\n",tmp->d_name);
 		ft_recursive(tmp->d_name, d);
 		if (i++ < d->nb_path)
 			ft_printf("\n");
