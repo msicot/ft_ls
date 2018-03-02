@@ -6,7 +6,7 @@
 /*   By: msicot <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/01 10:45:43 by msicot            #+#    #+#             */
-/*   Updated: 2018/03/02 12:19:08 by msicot           ###   ########.fr       */
+/*   Updated: 2018/03/02 13:39:19 by msicot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ void		ft_option_l(t_name **head, t_dir *d)
 	t_name				*node;
 	struct s_padding	pad;
 	int					i;
-	
+
 	ft_padd_0(&pad);
 	node = *head;
 	while (node != NULL)
@@ -76,4 +76,3 @@ void		ft_option_l(t_name **head, t_dir *d)
 	i = ft_count_lst(node);
 	ft_print_l(pad, &node, d, i);
 }
-

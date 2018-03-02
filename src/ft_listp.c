@@ -6,7 +6,7 @@
 /*   By: msicot <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/27 10:31:39 by msicot            #+#    #+#             */
-/*   Updated: 2018/03/02 11:02:14 by msicot           ###   ########.fr       */
+/*   Updated: 2018/03/02 13:40:45 by msicot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ void		ft_padd_0(struct s_padding *info)
 	info->ln_pad = 0;
 	info->nb_block = 0;
 }
+
 void		ft_del_listp(t_name **head)
 {
 	t_name	*tmp;
@@ -53,7 +54,6 @@ static void	ft_path_name(t_name **node, char *path)
 		bin = tmp->path;
 		tmp->path = ft_strjoin(tmp->path, tmp->d_name);
 		ft_strdel(&bin);
-//		ft_padd_0(&tmp->info);
 		tmp = tmp->next;
 	}
 	ft_strdel(&slash);
@@ -85,7 +85,6 @@ t_name		*create_list_path(DIR *dir, char *path)
 	ft_path_name(&head, path);
 	return (head);
 }
-
 
 void		order_list_p(t_name **head)
 {

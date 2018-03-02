@@ -6,7 +6,7 @@
 /*   By: msicot <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/28 18:19:05 by msicot            #+#    #+#             */
-/*   Updated: 2018/03/02 12:10:55 by msicot           ###   ########.fr       */
+/*   Updated: 2018/03/02 13:40:16 by msicot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,16 +15,18 @@
 static void	print_it(struct s_padding pad, t_name *node)
 {
 	ft_printf("%s%s  %*d %*s  %*s  %*d %s %s", node->info.type,
-			node->info.perm, pad.ln_pad, node->info.nb_l,pad.u_pad,
-			node->info.user, pad.gr_pad, node->info.group,pad.sz_pad,
+			node->info.perm, pad.ln_pad, node->info.nb_l, pad.u_pad,
+			node->info.user, pad.gr_pad, node->info.group, pad.sz_pad,
 			node->info.size, node->info.date, node->d_name);
 }
 
 void		ft_print_l(struct s_padding pad, t_name **head, t_dir *d, int i)
 {
 	t_name	*node;
-   
+
 	node = *head;
+	if (i == 2 && d->a == 0)
+		return ;
 	ft_printf("total %d\n", pad.nb_block);
 	while (node != NULL)
 	{
@@ -41,13 +43,14 @@ void		ft_print_l(struct s_padding pad, t_name **head, t_dir *d, int i)
 			if (i > 0)
 				ft_printf("\n");
 		}
+		ft_del_info(&node->info);
 		node = node->next;
 	}
 }
 
 int			ft_count_lst(t_name *head)
 {
-	t_name *tmp;
+	t_name	*tmp;
 	int		i;
 
 	if (head == NULL)
@@ -61,6 +64,7 @@ int			ft_count_lst(t_name *head)
 	}
 	return (i);
 }
+
 void		print_list_basic(t_name *head, int hidden)
 {
 	t_name	*tmp;
