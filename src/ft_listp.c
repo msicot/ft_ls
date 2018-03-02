@@ -6,18 +6,19 @@
 /*   By: msicot <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/27 10:31:39 by msicot            #+#    #+#             */
-/*   Updated: 2018/03/01 18:42:25 by msicot           ###   ########.fr       */
+/*   Updated: 2018/03/02 11:02:14 by msicot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
-void		ft_padd_0(t_lstat *info)
+void		ft_padd_0(struct s_padding *info)
 {
 	info->u_pad = 0;
 	info->gr_pad = 0;
 	info->sz_pad = 0;
 	info->ln_pad = 0;
+	info->nb_block = 0;
 }
 void		ft_del_listp(t_name **head)
 {
@@ -52,8 +53,8 @@ static void	ft_path_name(t_name **node, char *path)
 		bin = tmp->path;
 		tmp->path = ft_strjoin(tmp->path, tmp->d_name);
 		ft_strdel(&bin);
+//		ft_padd_0(&tmp->info);
 		tmp = tmp->next;
-		ft_padd_0(&tmp->info);
 	}
 	ft_strdel(&slash);
 }

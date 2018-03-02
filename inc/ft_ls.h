@@ -6,7 +6,7 @@
 /*   By: msicot <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/15 14:34:12 by msicot            #+#    #+#             */
-/*   Updated: 2018/03/01 18:31:15 by msicot           ###   ########.fr       */
+/*   Updated: 2018/03/02 12:17:01 by msicot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ typedef struct	s_lstat
 {
 	char	*type;
 	char	*perm;
-//	char	*group_p;
 	char	*all_p;
 	int		nb_l;
 	char	*user;
@@ -39,19 +38,21 @@ typedef struct	s_lstat
 	int		size;
 	char	*date;
 	char	*name;
+}				t_lstat;
+
+struct	s_padding
+{
 	int		u_pad;
 	int		gr_pad;
 	int		sz_pad;
 	int		ln_pad;
-
-}				t_lstat;
+	int		nb_block;
+};
 
 typedef struct	s_filename
 {
 	char				*d_name;
 	char				*path;
-//	char				**d_tab;
-//	int					d_nb;
 	t_lstat				info;
 	struct s_filename	*next; 
 }				t_name;
@@ -100,8 +101,11 @@ t_name			*create_list_path(DIR *dir, char *path);
 void			order_list(t_name **head);
 void			order_list_p(t_name **head);
 void			ft_merge_sort(t_name **head_ref);
+int				ft_count_lst(t_name *head);
 void			print_list_basic(t_name *head, int hidden);//, t_dir *d);
 void			ft_printl(t_name **head, t_dir *d);//, t_dir *d);
+void			ft_print_l(struct s_padding pad, t_name **head, t_dir *d,
+		int i);
 //void			print_list_0(t_name *head);//, t_dir *d); static ok
 void			ft_freeing(char **tab, t_dir *d);
 void			ft_ls_0(t_dir *d);
@@ -117,4 +121,5 @@ char			*perm(struct stat *sb);
 char			*u_name(struct stat *sb);
 char			*gr_name(struct stat *sb);
 char			*time_info(struct stat *sb);
+void			ft_padd_0(struct s_padding *info);
 #endif

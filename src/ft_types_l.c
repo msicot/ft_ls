@@ -6,7 +6,7 @@
 /*   By: msicot <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/01 11:17:20 by msicot            #+#    #+#             */
-/*   Updated: 2018/03/01 17:10:30 by msicot           ###   ########.fr       */
+/*   Updated: 2018/03/02 11:47:36 by msicot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,12 @@ char	*filetype(struct stat *sb)
 		return ("d");
 	if (S_ISCHR(sb->st_mode))
 		return ("c");
-	if (S_ISBLK(sb->st_mode))
+	if (S_ISLNK(sb->st_mode))
 		return ("l");
 	if (S_ISFIFO(sb->st_mode))
 		return ("p");
 	if (S_ISSOCK(sb->st_mode))
 		return ("b");
-	ft_printf("type = NULL\n");
 	return (NULL);
 }
 

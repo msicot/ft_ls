@@ -6,7 +6,7 @@
 /*   By: msicot <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/01 10:45:43 by msicot            #+#    #+#             */
-/*   Updated: 2018/03/01 18:41:50 by msicot           ###   ########.fr       */
+/*   Updated: 2018/03/02 12:19:08 by msicot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,21 +27,21 @@ static int	ft_num_len(int n)
 	return (i);
 }
 
-static void	ft_size_padd(t_lstat *s)
+static void	ft_size_padd(struct s_padding *s, t_lstat l)
 {
 	int i;
-	
-	i = ft_strlen(s->user);
+
+	i = ft_strlen(l.user);
 	s->u_pad = (s->u_pad > i) ? s->u_pad : i;
-	i = ft_strlen(s->group);
+	i = ft_strlen(l.group);
 	s->gr_pad = (s->gr_pad > i) ? s->gr_pad : i;
-	i = ft_num_len(s->size);
+	i = ft_num_len(l.size);
 	s->sz_pad = (s->sz_pad > i) ? s->sz_pad : i;
-	i = ft_num_len(s->nb_l);
+	i = ft_num_len(l.nb_l);
 	s->ln_pad = (s->ln_pad > i) ? s->ln_pad : i;
 }
 
-static void	ft_retrieve_l(char *path, t_lstat *info)
+static void	ft_retrieve_l(char *path, t_lstat *info, struct s_padding *pad)
 {
 	struct stat sb;
 
@@ -53,29 +53,27 @@ static void	ft_retrieve_l(char *path, t_lstat *info)
 		info->perm = perm(&sb);
 		info->nb_l = sb.st_nlink;
 		info->size = sb.st_size;
-		info->date = time_info(&sb);
+		info->date = ft_strdup(time_info(&sb));
+		pad->nb_block += sb.st_blocks;
 	}
 }
 
 void		ft_option_l(t_name **head, t_dir *d)
 {
-	t_name	*node;
-int i;
-
-i = d->nb_path;
+	t_name				*node;
+	struct s_padding	pad;
+	int					i;
+	
+	ft_padd_0(&pad);
 	node = *head;
-	ft_printf("loool\n");
 	while (node != NULL)
 	{
-		ft_retrieve_l(node->path, &node->info);
-		ft_size_padd(&node->info);
+		ft_retrieve_l(node->path, &node->info, &pad);
+		ft_size_padd(&pad, node->info);
 		node = node->next;
 	}
 	node = *head;
-	ft_printf("loool\n");
-	while (node != NULL)
-	{
-	printf("%s%s  %*d %*s  %*s  %*d %s %s\n", node->info.type, node->info.perm, node->info.ln_pad, node->info.nb_l, node->info.u_pad, node->info.user, node->info.gr_pad, node->info.group, node->info.sz_pad, node->info.size, node->info.date, node->d_name);
-	node = node->next;
-	}
+	i = ft_count_lst(node);
+	ft_print_l(pad, &node, d, i);
 }
+
