@@ -1,41 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   rm_node.c                                          :+:      :+:    :+:   */
+/*   bubble.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: msicot <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/02/22 11:18:24 by msicot            #+#    #+#             */
-/*   Updated: 2018/03/05 15:04:58 by msicot           ###   ########.fr       */
+/*   Created: 2018/03/05 13:09:46 by msicot            #+#    #+#             */
+/*   Updated: 2018/03/05 13:22:27 by msicot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
-t_name		*rm_node(t_name *currptr, char *value)
+void	bubble(t_name **head_ref)
 {
-	t_name	*nextptr;
+	t_name	*head;
+	int		i;
+	t_name	*curr;
+	t_name	*tmp;
 
-	if (currptr == NULL)
-		return (NULL);
-	if (currptr->d_name == value)
-	{
-		nextptr = currptr->next;
-		ft_strdel(&currptr->d_name);
-		free(currptr);
-		return (nextptr);
-	}
-	currptr->next = rm_node(currptr->next, value);
-	return (currptr);
-}
-
-void		del_tab(char ***tab)
-{
-	int i;
-
-	if (tab == NULL)
+	head = *head_ref;
+	if (head == NULL || head->next == NULL)
 		return ;
-	i = 0;
-	while (i < 5)
-		ft_strdel(tab[i++]);
+	tmp = head;
+	curr = tmp;
+	if (ft_strcmp(curr->d_name, curr->next->d_name <= 0))
+	{
+
+	}
+	
+
 }

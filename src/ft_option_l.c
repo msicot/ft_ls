@@ -6,11 +6,20 @@
 /*   By: msicot <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/01 10:45:43 by msicot            #+#    #+#             */
-/*   Updated: 2018/03/02 13:39:19 by msicot           ###   ########.fr       */
+/*   Updated: 2018/03/05 16:35:46 by msicot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
+
+void		ft_padd_0(struct s_padding *info)
+{
+	info->u_pad = 0;
+	info->gr_pad = 0;
+	info->sz_pad = 0;
+	info->ln_pad = 0;
+	info->nb_block = 0;
+}
 
 static int	ft_num_len(int n)
 {
@@ -53,9 +62,11 @@ static void	ft_retrieve_l(char *path, t_lstat *info, struct s_padding *pad)
 		info->perm = perm(&sb);
 		info->nb_l = sb.st_nlink;
 		info->size = sb.st_size;
-		info->date = ft_strdup(time_info(&sb));
+		info->date = time_info(&sb);
 		pad->nb_block += sb.st_blocks;
 	}
+	else
+		perror(path);
 }
 
 void		ft_option_l(t_name **head, t_dir *d)

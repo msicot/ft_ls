@@ -6,7 +6,7 @@
 /*   By: msicot <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/15 13:04:10 by msicot            #+#    #+#             */
-/*   Updated: 2018/03/02 10:20:55 by msicot           ###   ########.fr       */
+/*   Updated: 2018/03/05 16:24:46 by msicot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,18 +17,19 @@ void	ft_ls_no_op(t_dir *d)
 	int		j;
 	t_name	*tmp;
 
-	j = 0;
 	if (d->path == NULL && d->nb_path == 0)
 		d->path = ft_create_node(".");
+	j = (d->a == 1) ? ft_count_lst(d->path) : ft_count_lst(d->path) - 2;
 	tmp = d->path;
 	while (d->path != NULL && d->path->d_name != NULL)
 	{
-		if (!(d->head = get_names2(d->path->d_name)))
+		j--;
+		if (!(d->head = get_names2(d->path->d_name, d)))
 			return ;
 		if (d->nb_path > 1)
 			ft_printf("%s:\n", d->path->d_name);
 		ft_printl(&d->head, d);
-		if (++j < d->nb_path)
+		if (j > 0)
 			ft_printf("\n\n");
 		else
 			ft_printf("\n");
@@ -36,7 +37,7 @@ void	ft_ls_no_op(t_dir *d)
 		if (d->head != NULL)
 			ft_del_listp(&d->head);
 	}
-	if (d->path != NULL)
+	if (tmp != NULL)
 		ft_del_list(&tmp);
 }
 

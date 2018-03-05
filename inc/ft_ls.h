@@ -6,7 +6,7 @@
 /*   By: msicot <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/15 14:34:12 by msicot            #+#    #+#             */
-/*   Updated: 2018/03/02 13:18:28 by msicot           ###   ########.fr       */
+/*   Updated: 2018/03/05 16:48:47 by msicot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ typedef struct	s_filename
 {
 	char				*d_name;
 	char				*path;
+	time_t				ts;
 	t_lstat				info;
 	struct s_filename	*next; 
 }				t_name;
@@ -72,12 +73,11 @@ typedef struct	s_dir
 	int		len_m;
 	int		width;
 	int		nb_l;
-	char	**t;
 	int		l;
 	int		R;
 	int		a;
 	int		r;
-	int		t2;
+	int		t;
 	int		un;
 	int		flags;
 	int		minus;
@@ -101,9 +101,9 @@ t_name			*create_list(DIR *dir);
 t_name			*create_list_path(DIR *dir, char *path);
 void			order_list(t_name **head);
 void			order_list_p(t_name **head);
-void			ft_merge_sort(t_name **head_ref);
+void			ft_merge_sort(t_name **head_ref, t_dir *d);
 int				ft_count_lst(t_name *head);
-void			print_list_basic(t_name *head, int hidden);//, t_dir *d);
+void			print_list_basic(t_name *head, int hidden, t_dir *d);
 void			ft_printl(t_name **head, t_dir *d);//, t_dir *d);
 void			ft_print_l(struct s_padding pad, t_name **head, t_dir *d,
 		int i);
@@ -113,14 +113,16 @@ void			ft_ls_0(t_dir *d);
 void			ft_ls_no_op(t_dir *d);
 void			ft_ls_gr(t_dir *d);
 void			ft_path_check(t_dir *d);
-t_name			*get_names(char *path);
-t_name			*get_names2(char *path);
-t_name			*rm_node(t_name *currPtr, char *value);
+t_name			*get_names(char *path, t_dir *d);
+t_name			*get_names2(char *path, t_dir *d);
+t_name			*rm_node(t_name *currptr, char *value);
+void			del_tab(char ***tab);
 void			ft_option_l(t_name **head, t_dir *d);
 char			*filetype(struct stat *sb);
 char			*perm(struct stat *sb);
 char			*u_name(struct stat *sb);
 char			*gr_name(struct stat *sb);
 char			*time_info(struct stat *sb);
+time_t			time_stamp(char *path);
 void			ft_padd_0(struct s_padding *info);
 #endif

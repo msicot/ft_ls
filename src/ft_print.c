@@ -6,7 +6,7 @@
 /*   By: msicot <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/28 18:19:05 by msicot            #+#    #+#             */
-/*   Updated: 2018/03/02 13:40:16 by msicot           ###   ########.fr       */
+/*   Updated: 2018/03/05 17:04:22 by msicot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,11 +65,12 @@ int			ft_count_lst(t_name *head)
 	return (i);
 }
 
-void		print_list_basic(t_name *head, int hidden)
+void		print_list_basic(t_name *head, int hidden, t_dir *d)
 {
 	t_name	*tmp;
 	int		i;
 
+//	i = (d->r == 0 ) ? ft_count_lst(head) : ft_count_lst(head) - 2;
 	i = ft_count_lst(head);
 	tmp = head;
 	while (tmp != NULL)
@@ -77,14 +78,14 @@ void		print_list_basic(t_name *head, int hidden)
 		--i;
 		if (hidden == 1)
 		{
-			ft_printf("%s", tmp->d_name);
-			if (i > 0)
+			ft_printf("%s i=%d", tmp->d_name,i);
+			if ((i > 0))
 				ft_printf("\n");
 		}
 		else if (tmp->d_name[0] != '.')
 		{
-			ft_printf("%s", tmp->d_name);
-			if (i > 0)
+			ft_printf("%s", tmp->d_name, i);
+			if ((i > 0 && d->r == 0) || (i >3 && d->r == 1))
 				ft_printf("\n");
 		}
 		tmp = tmp->next;
@@ -94,7 +95,7 @@ void		print_list_basic(t_name *head, int hidden)
 void		ft_printl(t_name **head, t_dir *d)
 {
 	if (d->l == 0)
-		print_list_basic(*head, d->a);
+		print_list_basic(*head, d->a, d);
 	else
 		ft_option_l(head, d);
 }

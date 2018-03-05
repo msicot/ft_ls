@@ -6,7 +6,7 @@
 /*   By: msicot <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/20 14:27:27 by msicot            #+#    #+#             */
-/*   Updated: 2018/03/01 17:22:41 by msicot           ###   ########.fr       */
+/*   Updated: 2018/03/05 15:02:07 by msicot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,9 +69,8 @@ void		ft_path_check(t_dir *d)
 			perror(tmp->d_name);
 			d->path = rm_node(d->path, tmp->d_name);
 			tmp = d->path;
-			--d->nb_path;
 		}
 	}
-	ft_merge_sort(&d->path);
+	ft_merge_sort(&d->path, d);
 	ft_rm_files(d);
 }

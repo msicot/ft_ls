@@ -6,7 +6,7 @@
 /*   By: msicot <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/20 11:26:18 by msicot            #+#    #+#             */
-/*   Updated: 2018/03/01 17:30:29 by msicot           ###   ########.fr       */
+/*   Updated: 2018/03/05 14:51:15 by msicot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void		ft_ls_0(t_dir *d)
 	int		i;
 
 	i = d->nb_argc;
-	head = get_names(".");
+	head = get_names(".", d);
 	print_list_0(head);
 	ft_del_list(&head);
 }

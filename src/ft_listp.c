@@ -6,20 +6,11 @@
 /*   By: msicot <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/27 10:31:39 by msicot            #+#    #+#             */
-/*   Updated: 2018/03/02 13:40:45 by msicot           ###   ########.fr       */
+/*   Updated: 2018/03/05 15:51:50 by msicot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
-
-void		ft_padd_0(struct s_padding *info)
-{
-	info->u_pad = 0;
-	info->gr_pad = 0;
-	info->sz_pad = 0;
-	info->ln_pad = 0;
-	info->nb_block = 0;
-}
 
 void		ft_del_listp(t_name **head)
 {
@@ -37,13 +28,38 @@ void		ft_del_listp(t_name **head)
 	}
 }
 
+static void	ft_linked(t_name **node)
+{
+	t_name		*tmp;
+	char		buf[1024];
+	ssize_t		len;
+	struct stat	sb;
+	char		*temp;
+	
+	tmp = *node;
+	if (lstat(tmp->path, &sb) == 0 && (S_ISLNK(sb.st_mode)))
+	{
+		temp = tmp->d_name;
+		len = readlink(tmp->path, buf, sizeof(buf) - 1);
+		if (len != -1)
+			buf[len] = '\0';
+		else
+			return ;
+		tmp->d_name = ft_strjoin(tmp->d_name, " -> ");
+		ft_strdel(&temp);
+		temp = tmp->d_name;
+		tmp->d_name = ft_strjoin(tmp->d_name, buf);
+		ft_strdel(&temp);
+	}
+}
+
 static void	ft_path_name(t_name **node, char *path)
 {
 	t_name	*tmp;
 	char	*slash;
 	char	*bin;
 
-	if (path == NULL)
+	if (path == NULL || node == NULL)
 		return ;
 	if (!(slash = ft_strdup("/")))
 		return ;
@@ -53,6 +69,8 @@ static void	ft_path_name(t_name **node, char *path)
 		tmp->path = ft_strjoin(path, slash);
 		bin = tmp->path;
 		tmp->path = ft_strjoin(tmp->path, tmp->d_name);
+		tmp->ts = time_stamp(tmp->path);
+		ft_linked(&tmp);
 		ft_strdel(&bin);
 		tmp = tmp->next;
 	}
@@ -66,8 +84,6 @@ t_name		*create_list_path(DIR *dir, char *path)
 	t_name			*node;
 	struct dirent	*dent;
 
-	head = NULL;
-	tmp = NULL;
 	node = NULL;
 	if ((dent = readdir(dir)) != NULL)
 	{

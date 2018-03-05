@@ -6,7 +6,7 @@
 /*   By: msicot <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/19 11:23:52 by msicot            #+#    #+#             */
-/*   Updated: 2018/03/01 18:20:07 by msicot           ###   ########.fr       */
+/*   Updated: 2018/03/05 14:55:22 by msicot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static void		ft_flag_reset_ls(t_dir *d)
 	d->R = 0;
 	d->a = 0;
 	d->r = 0;
-	d->t2 = 0;
+	d->t = 0;
 	d->minus = 1;
 	d->options = 0;
 	d->un = 0;
@@ -36,7 +36,7 @@ static int		ft_ret_flags(t_dir *d, char c)
 	else if (c == 'r')
 		d->r = 1;
 	else if (c == 't')
-		d->t2 = 1;
+		d->t = 1;
 	else if (c == '0')
 		d->un = 1;
 	else

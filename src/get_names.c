@@ -6,13 +6,13 @@
 /*   By: msicot <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/20 09:10:26 by msicot            #+#    #+#             */
-/*   Updated: 2018/03/02 10:18:46 by msicot           ###   ########.fr       */
+/*   Updated: 2018/03/05 14:33:39 by msicot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
-t_name	*get_names(char *path)
+t_name	*get_names(char *path, t_dir *d)
 {
 	DIR		*dir;
 	t_name	*head;
@@ -23,13 +23,13 @@ t_name	*get_names(char *path)
 	else
 	{
 		head = create_list(dir);
-		ft_merge_sort(&head);
+		ft_merge_sort(&head, d);
 		closedir(dir);
 	}
 	return (head);
 }
 
-t_name	*get_names2(char *path)
+t_name	*get_names2(char *path, t_dir *d)
 {
 	t_name	*head;
 	DIR		*dir;
@@ -39,7 +39,7 @@ t_name	*get_names2(char *path)
 	else
 	{
 		head = create_list_path(dir, path);
-		ft_merge_sort(&head);
+		ft_merge_sort(&head, d);
 		closedir(dir);
 	}
 	return (head);
