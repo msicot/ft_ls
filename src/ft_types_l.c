@@ -6,7 +6,7 @@
 /*   By: msicot <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/01 11:17:20 by msicot            #+#    #+#             */
-/*   Updated: 2018/03/05 14:09:49 by msicot           ###   ########.fr       */
+/*   Updated: 2018/03/06 18:30:19 by msicot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ char	*filetype(struct stat *sb)
 		return ("l");
 	if (S_ISFIFO(sb->st_mode))
 		return ("p");
-	if (S_ISSOCK(sb->st_mode))
+	if (S_ISBLK(sb->st_mode))
 		return ("b");
 	return (NULL);
 }

@@ -6,7 +6,7 @@
 /*   By: msicot <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/01 10:45:43 by msicot            #+#    #+#             */
-/*   Updated: 2018/03/05 16:35:46 by msicot           ###   ########.fr       */
+/*   Updated: 2018/03/06 18:30:21 by msicot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ static int	ft_num_len(int n)
 	return (i);
 }
 
-static void	ft_size_padd(struct s_padding *s, t_lstat l)
+static void	ft_size_padd(struct s_padding *s, t_lstat l, t_dir *d, char *str)
 {
 	int i;
 
@@ -44,10 +44,18 @@ static void	ft_size_padd(struct s_padding *s, t_lstat l)
 	s->u_pad = (s->u_pad > i) ? s->u_pad : i;
 	i = ft_strlen(l.group);
 	s->gr_pad = (s->gr_pad > i) ? s->gr_pad : i;
-	i = ft_num_len(l.size);
-	s->sz_pad = (s->sz_pad > i) ? s->sz_pad : i;
-	i = ft_num_len(l.nb_l);
+	if (d->a == 0 && str[0] == '.')
+		i = 1;
+	else
+		i = ft_num_len(l.nb_l);
 	s->ln_pad = (s->ln_pad > i) ? s->ln_pad : i;
+	if (d->a == 0 && str[0] == '.')
+	{
+		i = 1;
+	}
+	else
+		i = ft_num_len(l.size);
+	s->sz_pad = (s->sz_pad > i) ? s->sz_pad : i;
 }
 
 static void	ft_retrieve_l(char *path, t_lstat *info, struct s_padding *pad)
@@ -56,7 +64,8 @@ static void	ft_retrieve_l(char *path, t_lstat *info, struct s_padding *pad)
 
 	if (lstat(path, &sb) == 0)
 	{
-		info->type = ft_strdup(filetype(&sb));
+		if (!(info->type = ft_strdup(filetype(&sb))))
+			return ;
 		info->user = ft_strdup(u_name(&sb));
 		info->group = ft_strdup(gr_name(&sb));
 		info->perm = perm(&sb);
@@ -80,7 +89,8 @@ void		ft_option_l(t_name **head, t_dir *d)
 	while (node != NULL)
 	{
 		ft_retrieve_l(node->path, &node->info, &pad);
-		ft_size_padd(&pad, node->info);
+		ft_linked(&node);
+		ft_size_padd(&pad, node->info, d, node->d_name);
 		node = node->next;
 	}
 	node = *head;

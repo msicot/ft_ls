@@ -6,7 +6,7 @@
 /*   By: msicot <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/20 15:30:25 by msicot            #+#    #+#             */
-/*   Updated: 2018/03/05 16:31:29 by msicot           ###   ########.fr       */
+/*   Updated: 2018/03/06 16:59:47 by msicot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,12 +47,10 @@ static void	ft_recursive(char *path, t_dir *d)
 	t_name		*head;
 	t_name		*tmp;
 
-	if ((head = get_names2(path, d)) == NULL)
+	if ((head = get_names2(path, d, path)) == NULL)
 		return ;
 	tmp = head;
-	ft_printl(&head, d);
-	if (ft_count_lst(tmp) > 2)
-		ft_printf("\n");
+	ft_print_opt(&head, d);
 	while (tmp != NULL && tmp->d_name != NULL)
 	{
 		if (ft_is_dir(tmp->path) == 1 && ft_is_point(tmp->d_name, d) == 0)
@@ -71,18 +69,17 @@ void		ft_ls_gr(t_dir *d)
 	t_name	*tmp;
 	int		i;
 
-	i = 1;
+	i = ft_count_lst(d->path);
 	if (d->path == NULL && d->nb_path == 0)
 		d->path = ft_create_node(".");
 	tmp = d->path;
 	while (tmp != NULL && tmp->d_name != NULL)
 	{
-		if (d->nb_argc > 1 && i > 1)
+		if (d->nb_path > 1)
 			ft_printf("%s:\n", tmp->d_name);
 		ft_recursive(tmp->d_name, d);
-		if (i++ < d->nb_path)
-			ft_printf("\n\n");
 		tmp = tmp->next;
+		--i;
 	}
 	if (d->path != NULL)
 		ft_del_list(&d->path);

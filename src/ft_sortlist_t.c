@@ -6,7 +6,7 @@
 /*   By: msicot <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/28 11:19:40 by msicot            #+#    #+#             */
-/*   Updated: 2018/03/06 12:08:27 by msicot           ###   ########.fr       */
+/*   Updated: 2018/03/06 16:31:00 by msicot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,19 @@ static void		fbsplit(t_name *source, t_name **front_r, t_name **back_r)
 	slow->next = NULL;
 }
 
-static t_name	*sortedmerge(t_name *a, t_name *b, t_dir *d)
+static intmax_t	ft_compare(t_name *a, t_name *b, t_dir *d)
+{
+	if (d->r == 0)
+	{
+		return ((a->ts - b->ts));
+	}
+	else
+	{
+		return ((b->ts - a->ts));
+	}
+}
+
+static t_name	*sortedmerge_t(t_name *a, t_name *b, t_dir *d)
 {
 	t_name *result;
 
@@ -54,20 +66,20 @@ static t_name	*sortedmerge(t_name *a, t_name *b, t_dir *d)
 		return (b);
 	else if (b == NULL)
 		return (a);
-	if (ft_strcmp(a->d_name, b->d_name) <= 0)
+	if (ft_compare(a, b, d) >= 0)
 	{
 		result = a;
-		result->next = sortedmerge(a->next, b, d);
+		result->next = sortedmerge_t(a->next, b, d);
 	}
 	else
 	{
 		result = b;
-		result->next = sortedmerge(a, b->next, d);
+		result->next = sortedmerge_t(a, b->next, d);
 	}
 	return (result);
 }
 
-void			ft_merge_sort(t_name **head_ref, t_dir *d)
+void			ft_merge_sort_t(t_name **head_ref, t_dir *d)
 {
 	t_name	*head;
 	t_name	*a;
@@ -77,7 +89,7 @@ void			ft_merge_sort(t_name **head_ref, t_dir *d)
 	if ((head == NULL) || (head->next == NULL))
 		return ;
 	fbsplit(head, &a, &b);
-	ft_merge_sort(&a, d);
-	ft_merge_sort(&b, d);
-	*head_ref = sortedmerge(a, b, d);
+	ft_merge_sort_t(&a, d);
+	ft_merge_sort_t(&b, d);
+	*head_ref = sortedmerge_t(a, b, d);
 }

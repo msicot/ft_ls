@@ -6,7 +6,7 @@
 /*   By: msicot <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/15 14:34:12 by msicot            #+#    #+#             */
-/*   Updated: 2018/03/05 16:48:47 by msicot           ###   ########.fr       */
+/*   Updated: 2018/03/06 16:54:08 by msicot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,28 +93,32 @@ t_name			*ft_create_node(char *str);
 void			ft_del_list(t_name **head);
 void			ft_del_listp(t_name **head);
 void			ft_del_info(t_lstat *info);
-//void			ft_print_line(t_name *head, t_dir *stru);
 void			ft_flags(char **tab, t_dir *d);
 void			ft_error_flag(char c);
 void			ft_err_path(char *s);
+void			ft_err_perm(char *str);
 t_name			*create_list(DIR *dir);
 t_name			*create_list_path(DIR *dir, char *path);
 void			order_list(t_name **head);
 void			order_list_p(t_name **head);
 void			ft_merge_sort(t_name **head_ref, t_dir *d);
+void			ft_merge_sort_t(t_name **head_ref, t_dir *d);
+void			ft_merge_sort_r(t_name **head_ref, t_dir *d);
 int				ft_count_lst(t_name *head);
-void			print_list_basic(t_name *head, int hidden, t_dir *d);
-void			ft_printl(t_name **head, t_dir *d);//, t_dir *d);
+void			print_list_basic(t_name *head, t_dir *d);
+void			ft_print_opt(t_name **head, t_dir *d);//, t_dir *d);
 void			ft_print_l(struct s_padding pad, t_name **head, t_dir *d,
 		int i);
-//void			print_list_0(t_name *head);//, t_dir *d); static ok
 void			ft_freeing(char **tab, t_dir *d);
 void			ft_ls_0(t_dir *d);
-void			ft_ls_no_op(t_dir *d);
+void			ft_ls_else(t_dir *d);
 void			ft_ls_gr(t_dir *d);
 void			ft_path_check(t_dir *d);
+//void			ft_path_order(t_name **head, t_dir *d);
+void			ft_path_order(t_dir *d);
 t_name			*get_names(char *path, t_dir *d);
-t_name			*get_names2(char *path, t_dir *d);
+t_name			*get_names2(char *path, t_dir *d, char *str);
+void			ft_linked(t_name **node);
 t_name			*rm_node(t_name *currptr, char *value);
 void			del_tab(char ***tab);
 void			ft_option_l(t_name **head, t_dir *d);

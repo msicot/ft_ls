@@ -6,7 +6,7 @@
 /*   By: msicot <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/27 10:31:39 by msicot            #+#    #+#             */
-/*   Updated: 2018/03/05 15:51:50 by msicot           ###   ########.fr       */
+/*   Updated: 2018/03/06 16:30:10 by msicot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,14 +28,14 @@ void		ft_del_listp(t_name **head)
 	}
 }
 
-static void	ft_linked(t_name **node)
+void		ft_linked(t_name **node)
 {
 	t_name		*tmp;
 	char		buf[1024];
 	ssize_t		len;
 	struct stat	sb;
 	char		*temp;
-	
+
 	tmp = *node;
 	if (lstat(tmp->path, &sb) == 0 && (S_ISLNK(sb.st_mode)))
 	{
@@ -70,7 +70,6 @@ static void	ft_path_name(t_name **node, char *path)
 		bin = tmp->path;
 		tmp->path = ft_strjoin(tmp->path, tmp->d_name);
 		tmp->ts = time_stamp(tmp->path);
-		ft_linked(&tmp);
 		ft_strdel(&bin);
 		tmp = tmp->next;
 	}

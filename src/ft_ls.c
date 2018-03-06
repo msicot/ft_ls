@@ -6,42 +6,52 @@
 /*   By: msicot <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/15 13:04:10 by msicot            #+#    #+#             */
-/*   Updated: 2018/03/05 16:24:46 by msicot           ###   ########.fr       */
+/*   Updated: 2018/03/06 19:08:40 by msicot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
-void	ft_ls_no_op(t_dir *d)
+void		ft_ls_else(t_dir *d)
 {
 	int		j;
 	t_name	*tmp;
 
 	if (d->path == NULL && d->nb_path == 0)
 		d->path = ft_create_node(".");
-	j = (d->a == 1) ? ft_count_lst(d->path) : ft_count_lst(d->path) - 2;
+	j = ft_count_lst(d->path);
 	tmp = d->path;
 	while (d->path != NULL && d->path->d_name != NULL)
 	{
-		j--;
-		if (!(d->head = get_names2(d->path->d_name, d)))
+		if (!(d->head = get_names2(d->path->d_name, d, d->path->d_name)))
 			return ;
 		if (d->nb_path > 1)
 			ft_printf("%s:\n", d->path->d_name);
-		ft_printl(&d->head, d);
-		if (j > 0)
-			ft_printf("\n\n");
-		else
+		ft_print_opt(&d->head, d);
+		if (j > 1)
 			ft_printf("\n");
 		d->path = d->path->next;
 		if (d->head != NULL)
 			ft_del_listp(&d->head);
+		--j;
 	}
 	if (tmp != NULL)
 		ft_del_list(&tmp);
 }
 
-int		main(int argc, char **argv)
+static void	ft_clear_info(t_name **path)
+{
+	t_name *tmp;
+
+	tmp = *path;
+	while (tmp != NULL)
+	{
+		ft_strdel(&tmp->info.date);
+		tmp = tmp->next;
+	}
+}
+
+int			main(int argc, char **argv)
 {
 	t_dir	d;
 
@@ -55,10 +65,12 @@ int		main(int argc, char **argv)
 	{
 		ft_flags(argv, &d);
 		ft_path_check(&d);
+		ft_path_order(&d);
+		ft_clear_info(&d.path);
 		if (d.R == 1)
 			ft_ls_gr(&d);
 		else
-			ft_ls_no_op(&d);
+			ft_ls_else(&d);
 	}
 	return (0);
 }

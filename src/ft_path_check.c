@@ -6,7 +6,7 @@
 /*   By: msicot <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/20 14:27:27 by msicot            #+#    #+#             */
-/*   Updated: 2018/03/05 15:02:07 by msicot           ###   ########.fr       */
+/*   Updated: 2018/03/06 17:11:25 by msicot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,20 @@ static void	ft_check_dash1(t_dir *d)
 	}
 }
 
+void		ft_path_order(t_dir *d)
+{
+	if (d->path == NULL)
+		return ;
+	if (d->r == 0)
+		ft_merge_sort(&d->path, d);
+	else
+		ft_merge_sort_r(&d->path, d);
+	if (d->t == 1)
+	{
+		ft_merge_sort_t(&d->path, d);
+	}
+}
+
 void		ft_path_check(t_dir *d)
 {
 	struct stat	sb;
@@ -59,14 +73,14 @@ void		ft_path_check(t_dir *d)
 	tmp = d->path;
 	while (tmp != NULL)
 	{
-		if (stat(tmp->d_name, &sb) == 0)
+		if (lstat(tmp->d_name, &sb) == 0)
 		{
+			tmp->info.date = time_info(&sb);
 			tmp = tmp->next;
 		}
 		else
 		{
-			ft_printf("ls: ");
-			perror(tmp->d_name);
+			ft_err_path(tmp->d_name);
 			d->path = rm_node(d->path, tmp->d_name);
 			tmp = d->path;
 		}

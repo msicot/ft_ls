@@ -6,7 +6,7 @@
 /*   By: msicot <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/28 18:19:05 by msicot            #+#    #+#             */
-/*   Updated: 2018/03/05 17:04:22 by msicot           ###   ########.fr       */
+/*   Updated: 2018/03/06 15:26:00 by msicot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static void	print_it(struct s_padding pad, t_name *node)
 {
-	ft_printf("%s%s  %*d %*s  %*s  %*d %s %s", node->info.type,
+	ft_printf("%s%s  %*d %*s  %*s  %*d %s %s\n", node->info.type,
 			node->info.perm, pad.ln_pad, node->info.nb_l, pad.u_pad,
 			node->info.user, pad.gr_pad, node->info.group, pad.sz_pad,
 			node->info.size, node->info.date, node->d_name);
@@ -31,17 +31,15 @@ void		ft_print_l(struct s_padding pad, t_name **head, t_dir *d, int i)
 	while (node != NULL)
 	{
 		--i;
-		if (d->a == 1)
+		if (node->d_name[0] == '.' && d->a == 0)
 		{
-			print_it(pad, node);
-			if (i > 0)
-				ft_printf("\n");
+			ft_del_info(&node->info);
+			node = node->next;
+			continue ;
 		}
-		else if (node->d_name[0] != '.')
+		else
 		{
 			print_it(pad, node);
-			if (i > 0)
-				ft_printf("\n");
 		}
 		ft_del_info(&node->info);
 		node = node->next;
@@ -53,8 +51,6 @@ int			ft_count_lst(t_name *head)
 	t_name	*tmp;
 	int		i;
 
-	if (head == NULL)
-		return (0);
 	tmp = head;
 	i = 0;
 	while (tmp != NULL)
@@ -65,37 +61,35 @@ int			ft_count_lst(t_name *head)
 	return (i);
 }
 
-void		print_list_basic(t_name *head, int hidden, t_dir *d)
+void		print_list_basic(t_name *head, t_dir *d)
 {
-	t_name	*tmp;
+	t_name	*node;
 	int		i;
 
-//	i = (d->r == 0 ) ? ft_count_lst(head) : ft_count_lst(head) - 2;
 	i = ft_count_lst(head);
-	tmp = head;
-	while (tmp != NULL)
+	if (i == 2 && d->a == 0)
+		return ;
+	node = head;
+	while (node != NULL)
 	{
 		--i;
-		if (hidden == 1)
+		if (node->d_name[0] == '.' && d->a == 0)
 		{
-			ft_printf("%s i=%d", tmp->d_name,i);
-			if ((i > 0))
-				ft_printf("\n");
+			node = node->next;
+			continue ;
 		}
-		else if (tmp->d_name[0] != '.')
+		else
 		{
-			ft_printf("%s", tmp->d_name, i);
-			if ((i > 0 && d->r == 0) || (i >3 && d->r == 1))
-				ft_printf("\n");
+			ft_printf("%s\n", node->d_name);
 		}
-		tmp = tmp->next;
+		node = node->next;
 	}
 }
 
-void		ft_printl(t_name **head, t_dir *d)
+void		ft_print_opt(t_name **head, t_dir *d)
 {
 	if (d->l == 0)
-		print_list_basic(*head, d->a, d);
+		print_list_basic(*head, d);
 	else
 		ft_option_l(head, d);
 }

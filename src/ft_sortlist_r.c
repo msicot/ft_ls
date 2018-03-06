@@ -6,7 +6,7 @@
 /*   By: msicot <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/28 11:19:40 by msicot            #+#    #+#             */
-/*   Updated: 2018/03/06 12:08:27 by msicot           ###   ########.fr       */
+/*   Updated: 2018/03/06 13:22:03 by msicot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ static t_name	*sortedmerge(t_name *a, t_name *b, t_dir *d)
 		return (b);
 	else if (b == NULL)
 		return (a);
-	if (ft_strcmp(a->d_name, b->d_name) <= 0)
+	if (ft_strcmp(a->d_name, b->d_name) >= 0)
 	{
 		result = a;
 		result->next = sortedmerge(a->next, b, d);
@@ -67,7 +67,7 @@ static t_name	*sortedmerge(t_name *a, t_name *b, t_dir *d)
 	return (result);
 }
 
-void			ft_merge_sort(t_name **head_ref, t_dir *d)
+void			ft_merge_sort_r(t_name **head_ref, t_dir *d)
 {
 	t_name	*head;
 	t_name	*a;
@@ -77,7 +77,7 @@ void			ft_merge_sort(t_name **head_ref, t_dir *d)
 	if ((head == NULL) || (head->next == NULL))
 		return ;
 	fbsplit(head, &a, &b);
-	ft_merge_sort(&a, d);
-	ft_merge_sort(&b, d);
+	ft_merge_sort_r(&a, d);
+	ft_merge_sort_r(&b, d);
 	*head_ref = sortedmerge(a, b, d);
 }
