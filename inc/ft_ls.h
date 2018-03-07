@@ -6,7 +6,7 @@
 /*   By: msicot <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/15 14:34:12 by msicot            #+#    #+#             */
-/*   Updated: 2018/03/06 16:54:08 by msicot           ###   ########.fr       */
+/*   Updated: 2018/03/07 15:43:51 by msicot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 # include "../libft/inc/libft.h"
 # include "../libft/inc/libftprintf.h"
 # include <errno.h>
+# include <sys/acl.h>
 # include <grp.h>
 #include <pwd.h>
 # include <sys/types.h>
@@ -23,21 +24,25 @@
 # include <sys/stat.h>
 # include <dirent.h>
 # include <sys/ioctl.h> /* ioctl TIOCGWINSZ */
+# include <sys/xattr.h>
 # include <stdlib.h>
 # include <time.h>
 # include <uuid/uuid.h>
-
 typedef struct	s_lstat
 {
 	char	*type;
 	char	*perm;
 	char	*all_p;
+	char	*acl;
 	int		nb_l;
 	char	*user;
 	char	*group;
+	int		maj;
+	int		maj_min;
 	int		size;
 	char	*date;
 	char	*name;
+
 }				t_lstat;
 
 struct	s_padding
@@ -47,6 +52,7 @@ struct	s_padding
 	int		sz_pad;
 	int		ln_pad;
 	int		nb_block;
+	int		maj_pad;
 };
 
 typedef struct	s_filename
@@ -123,9 +129,11 @@ t_name			*rm_node(t_name *currptr, char *value);
 void			del_tab(char ***tab);
 void			ft_option_l(t_name **head, t_dir *d);
 char			*filetype(struct stat *sb);
+char			*acl_type(struct stat *sb, const char *path);
 char			*perm(struct stat *sb);
 char			*u_name(struct stat *sb);
 char			*gr_name(struct stat *sb);
+void			get_majmin(struct stat *sb, t_lstat **info);
 char			*time_info(struct stat *sb);
 time_t			time_stamp(char *path);
 void			ft_padd_0(struct s_padding *info);

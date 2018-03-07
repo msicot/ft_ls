@@ -6,7 +6,7 @@
 /*   By: msicot <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/28 18:19:05 by msicot            #+#    #+#             */
-/*   Updated: 2018/03/06 15:26:00 by msicot           ###   ########.fr       */
+/*   Updated: 2018/03/07 16:21:58 by msicot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,18 @@
 
 static void	print_it(struct s_padding pad, t_name *node)
 {
-	ft_printf("%s%s  %*d %*s  %*s  %*d %s %s\n", node->info.type,
-			node->info.perm, pad.ln_pad, node->info.nb_l, pad.u_pad,
-			node->info.user, pad.gr_pad, node->info.group, pad.sz_pad,
-			node->info.size, node->info.date, node->d_name);
+	ft_printf("%s%s%s ", node->info.type, node->info.perm, node->info.acl);
+	ft_printf("%*d %-*s  %-*s  ", pad.ln_pad, node->info.nb_l, pad.u_pad, node->info.user, pad.gr_pad, node->info.group);
+	if (node->info.maj_min == 1)
+	{
+		ft_printf("%*d, ", pad.maj_pad, node->info.maj);
+	}
+	else if (pad.maj_pad > 0)
+	{
+		ft_printf("%*c  ", pad.maj_pad, ' ');
+	}
+	ft_printf("%*d %s %s\n", pad.sz_pad, node->info.size, node->info.date, node->d_name);
+
 }
 
 void		ft_print_l(struct s_padding pad, t_name **head, t_dir *d, int i)

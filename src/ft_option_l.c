@@ -6,7 +6,7 @@
 /*   By: msicot <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/01 10:45:43 by msicot            #+#    #+#             */
-/*   Updated: 2018/03/06 18:30:21 by msicot           ###   ########.fr       */
+/*   Updated: 2018/03/07 16:19:54 by msicot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ void		ft_padd_0(struct s_padding *info)
 	info->sz_pad = 0;
 	info->ln_pad = 0;
 	info->nb_block = 0;
+	info->maj_pad = 0;
 }
 
 static int	ft_num_len(int n)
@@ -50,18 +51,23 @@ static void	ft_size_padd(struct s_padding *s, t_lstat l, t_dir *d, char *str)
 		i = ft_num_len(l.nb_l);
 	s->ln_pad = (s->ln_pad > i) ? s->ln_pad : i;
 	if (d->a == 0 && str[0] == '.')
-	{
 		i = 1;
-	}
 	else
 		i = ft_num_len(l.size);
 	s->sz_pad = (s->sz_pad > i) ? s->sz_pad : i;
+	if (l.maj_min == 1)
+	{
+		i = ft_num_len(l.maj);
+		s->maj_pad = (s->maj_pad > i) ? s->maj_pad : i;
+	}
 }
 
 static void	ft_retrieve_l(char *path, t_lstat *info, struct s_padding *pad)
 {
 	struct stat sb;
 
+	info->size = 0;
+	info->maj = 0;
 	if (lstat(path, &sb) == 0)
 	{
 		if (!(info->type = ft_strdup(filetype(&sb))))
@@ -70,9 +76,13 @@ static void	ft_retrieve_l(char *path, t_lstat *info, struct s_padding *pad)
 		info->group = ft_strdup(gr_name(&sb));
 		info->perm = perm(&sb);
 		info->nb_l = sb.st_nlink;
-		info->size = sb.st_size;
+		if (ft_strcmp("b", info->type) != 0 && ft_strcmp("c", info->type) != 0)
+			info->size = sb.st_size;
+		else
+			get_majmin(&sb, &info);
 		info->date = time_info(&sb);
 		pad->nb_block += sb.st_blocks;
+		info->acl = acl_type(&sb, path);
 	}
 	else
 		perror(path);

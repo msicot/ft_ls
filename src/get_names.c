@@ -6,11 +6,22 @@
 /*   By: msicot <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/20 09:10:26 by msicot            #+#    #+#             */
-/*   Updated: 2018/03/06 16:52:52 by msicot           ###   ########.fr       */
+/*   Updated: 2018/03/07 17:34:50 by msicot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
+
+/*static int	ft_is_point(char *value)
+{
+	if (value == NULL)
+		return (0);
+	if (ft_strcmp(value, ".") == 0)
+		return (1);
+	if (ft_strcmp(value, "..") == 0)
+		return (1);
+	return (0);
+}*/
 
 t_name	*get_names(char *path, t_dir *d)
 {
