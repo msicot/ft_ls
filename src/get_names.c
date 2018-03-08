@@ -6,22 +6,11 @@
 /*   By: msicot <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/20 09:10:26 by msicot            #+#    #+#             */
-/*   Updated: 2018/03/07 17:34:50 by msicot           ###   ########.fr       */
+/*   Updated: 2018/03/08 15:11:05 by msicot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
-
-/*static int	ft_is_point(char *value)
-{
-	if (value == NULL)
-		return (0);
-	if (ft_strcmp(value, ".") == 0)
-		return (1);
-	if (ft_strcmp(value, "..") == 0)
-		return (1);
-	return (0);
-}*/
 
 t_name	*get_names(char *path, t_dir *d)
 {
@@ -54,7 +43,7 @@ t_name	*get_names2(char *path, t_dir *d, char *str)
 	}
 	else
 	{
-		head = create_list_path(dir, path);
+		head = create_list_path(dir, path, d);
 		if (d->r == 0)
 			ft_merge_sort(&head, d);
 		else

@@ -6,7 +6,7 @@
 /*   By: msicot <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/28 18:19:05 by msicot            #+#    #+#             */
-/*   Updated: 2018/03/07 16:21:58 by msicot           ###   ########.fr       */
+/*   Updated: 2018/03/08 14:44:48 by msicot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,12 @@ void		ft_print_l(struct s_padding pad, t_name **head, t_dir *d, int i)
 	t_name	*node;
 
 	node = *head;
-	if (i == 2 && d->a == 0)
+	if (ft_total(node) == 1 && d->a == 0)
 		return ;
-	ft_printf("total %d\n", pad.nb_block);
+//	if (i > 2 && d->a == 0)
+		ft_printf("total %d\n", pad.nb_block);
+//	else if (d->a == 1)
+//	ft_printf("total %d\n", pad.nb_block);
 	while (node != NULL)
 	{
 		--i;

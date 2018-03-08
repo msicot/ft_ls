@@ -6,7 +6,7 @@
 /*   By: msicot <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/15 14:34:12 by msicot            #+#    #+#             */
-/*   Updated: 2018/03/07 15:43:51 by msicot           ###   ########.fr       */
+/*   Updated: 2018/03/08 15:11:32 by msicot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,7 @@ void			ft_error_flag(char c);
 void			ft_err_path(char *s);
 void			ft_err_perm(char *str);
 t_name			*create_list(DIR *dir);
-t_name			*create_list_path(DIR *dir, char *path);
+t_name			*create_list_path(DIR *dir, char *path, t_dir *d);
 void			order_list(t_name **head);
 void			order_list_p(t_name **head);
 void			ft_merge_sort(t_name **head_ref, t_dir *d);
@@ -129,7 +129,7 @@ t_name			*rm_node(t_name *currptr, char *value);
 void			del_tab(char ***tab);
 void			ft_option_l(t_name **head, t_dir *d);
 char			*filetype(struct stat *sb);
-char			*acl_type(struct stat *sb, const char *path);
+char			*acl_type(const char *path, char *str);
 char			*perm(struct stat *sb);
 char			*u_name(struct stat *sb);
 char			*gr_name(struct stat *sb);
@@ -137,4 +137,5 @@ void			get_majmin(struct stat *sb, t_lstat **info);
 char			*time_info(struct stat *sb);
 time_t			time_stamp(char *path);
 void			ft_padd_0(struct s_padding *info);
+int				ft_total(t_name *tmp);
 #endif

@@ -6,7 +6,7 @@
 /*   By: msicot <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/01 10:45:43 by msicot            #+#    #+#             */
-/*   Updated: 2018/03/07 16:19:54 by msicot           ###   ########.fr       */
+/*   Updated: 2018/03/08 16:43:40 by msicot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ static void	ft_retrieve_l(char *path, t_lstat *info, struct s_padding *pad)
 
 	info->size = 0;
 	info->maj = 0;
-	if (lstat(path, &sb) == 0)
+	if (lstat(path, &sb) != -1)
 	{
 		if (!(info->type = ft_strdup(filetype(&sb))))
 			return ;
@@ -82,7 +82,7 @@ static void	ft_retrieve_l(char *path, t_lstat *info, struct s_padding *pad)
 			get_majmin(&sb, &info);
 		info->date = time_info(&sb);
 		pad->nb_block += sb.st_blocks;
-		info->acl = acl_type(&sb, path);
+		info->acl = acl_type(path, info->type);
 	}
 	else
 		perror(path);
@@ -96,11 +96,15 @@ void		ft_option_l(t_name **head, t_dir *d)
 
 	ft_padd_0(&pad);
 	node = *head;
+	i = 0;
 	while (node != NULL)
 	{
+		i = pad.nb_block;	
 		ft_retrieve_l(node->path, &node->info, &pad);
 		ft_linked(&node);
 		ft_size_padd(&pad, node->info, d, node->d_name);
+		if (d->a == 0 && node->d_name[0] == '.')
+			pad.nb_block = i;
 		node = node->next;
 	}
 	node = *head;

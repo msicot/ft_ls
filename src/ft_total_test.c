@@ -1,26 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_del_info.c                                      :+:      :+:    :+:   */
+/*   ft_total_test.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: msicot <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/03/02 12:21:35 by msicot            #+#    #+#             */
-/*   Updated: 2018/03/08 17:17:41 by msicot           ###   ########.fr       */
+/*   Created: 2018/03/08 14:40:53 by msicot            #+#    #+#             */
+/*   Updated: 2018/03/08 14:45:45 by msicot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
-void	ft_del_info(t_lstat *info)
+int	ft_total(t_name *tmp)
 {
-	if (info != NULL)
+	while (tmp != NULL)
 	{
-		ft_strdel(&info->type);
-		ft_strdel(&info->user);
-		ft_strdel(&info->group);
-		ft_strdel(&info->date);
-		ft_strdel(&info->perm);
-		ft_strdel(&info->acl);
+		if (tmp->d_name[0] == '.')
+			tmp = tmp->next;
+		else
+			return (0);
 	}
+	return (1);
 }

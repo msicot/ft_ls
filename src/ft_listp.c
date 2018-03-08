@@ -6,7 +6,7 @@
 /*   By: msicot <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/27 10:31:39 by msicot            #+#    #+#             */
-/*   Updated: 2018/03/06 16:30:10 by msicot           ###   ########.fr       */
+/*   Updated: 2018/03/08 15:21:46 by msicot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,23 +76,26 @@ static void	ft_path_name(t_name **node, char *path)
 	ft_strdel(&slash);
 }
 
-t_name		*create_list_path(DIR *dir, char *path)
+t_name		*create_list_path(DIR *dir, char *path, t_dir *d)
 {
 	t_name			*head;
 	t_name			*tmp;
 	t_name			*node;
-	struct dirent	*dent;
 
+	struct dirent	*dent;
 	node = NULL;
-	if ((dent = readdir(dir)) != NULL)
-	{
-		if (!(node = ft_create_node(dent->d_name)))
-			return (NULL);
-	}
-	head = node;
-	tmp = node;
 	while ((dent = readdir(dir)) != NULL)
 	{
+		if (dent->d_name[0] == '.' && d->a == 0)
+			continue;
+		if (node == NULL)
+		{
+			if (!(node = ft_create_node(dent->d_name)))
+				return (NULL);
+			head = node;
+			tmp = node;
+			continue ;
+		}
 		if ((tmp->next = ft_create_node(dent->d_name)) == NULL)
 			return (NULL);
 		tmp = tmp->next;

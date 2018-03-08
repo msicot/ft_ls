@@ -6,7 +6,7 @@
 /*   By: msicot <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/07 11:11:46 by msicot            #+#    #+#             */
-/*   Updated: 2018/03/07 13:24:02 by msicot           ###   ########.fr       */
+/*   Updated: 2018/03/08 18:08:36 by msicot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,26 +31,24 @@ char	*filetype(struct stat *sb)
 	return (NULL);
 }
 
-char	*acl_type(struct stat *sb, const char *path)
+char	*acl_type(const char *path, char *s)
 {
 	acl_t   acl;
 	char	buff[1024];
 	char	*str;
-	int 	i;
-	if (S_ISREG(sb->st_mode))
-			i = 0;
 
 	str = ft_strdup(" ");
 	acl = NULL;
+	acl = acl_get_file(path, ACL_TYPE_EXTENDED);
+	if (acl != NULL)
+	{
+		if (ft_strcmp("l", s) != 0)
+			str[0] = '+';
+		acl_free((void *)acl);
+		acl = NULL;
+		return (str);
+	}
 	if (listxattr(path, buff, 1024, XATTR_NOFOLLOW) > 0)
 		str[0] = '@';
-	else
-	{
-		if(acl_get_file(path, ACL_TYPE_EXTENDED))
-		{
-			str[1] = '+';
-			acl_free((void *)acl);
-		}
-	}
 	return (str);
 }
