@@ -6,7 +6,7 @@
 /*   By: msicot <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/01 11:17:20 by msicot            #+#    #+#             */
-/*   Updated: 2018/03/07 16:20:13 by msicot           ###   ########.fr       */
+/*   Updated: 2018/03/09 11:42:48 by msicot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,8 @@ void	get_majmin(struct stat *sb, t_lstat **info)
 	tmp->maj_min = 1;
 	tmp->maj = major(sb->st_rdev);
 	tmp->size = minor(sb->st_rdev);
-
 }
+
 char	*perm(struct stat *sb)
 {
 	char	*str;
@@ -56,6 +56,14 @@ char	*perm(struct stat *sb)
 	str[i++] = (sb->st_mode & S_IXGRP) ? 'x' : '-';
 	str[i++] = (sb->st_mode & S_IROTH) ? 'r' : '-';
 	str[i++] = (sb->st_mode & S_IWOTH) ? 'w' : '-';
-	str[i++] = (sb->st_mode & S_IXOTH) ? 'x' : '-';
+	if (sb->st_mode & S_ISVTX)
+	{
+		str[i] = 't';
+		return (str);
+	}
+	else
+		str[i] = '-';
+	if (sb->st_mode & S_IXOTH)
+		str[i] = 'x';
 	return (str);
 }

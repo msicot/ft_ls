@@ -6,7 +6,7 @@
 /*   By: msicot <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/27 10:31:39 by msicot            #+#    #+#             */
-/*   Updated: 2018/03/08 15:21:46 by msicot           ###   ########.fr       */
+/*   Updated: 2018/03/09 13:40:41 by msicot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,8 +81,8 @@ t_name		*create_list_path(DIR *dir, char *path, t_dir *d)
 	t_name			*head;
 	t_name			*tmp;
 	t_name			*node;
-
 	struct dirent	*dent;
+
 	node = NULL;
 	while ((dent = readdir(dir)) != NULL)
 	{

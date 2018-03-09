@@ -6,7 +6,7 @@
 /*   By: msicot <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/20 09:10:26 by msicot            #+#    #+#             */
-/*   Updated: 2018/03/08 15:11:05 by msicot           ###   ########.fr       */
+/*   Updated: 2018/03/09 11:43:31 by msicot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ t_name	*get_names2(char *path, t_dir *d, char *str)
 	if ((dir = opendir(path)) == NULL)
 	{
 		ft_err_perm(str);
-		return(NULL);
+		return (NULL);
 	}
 	else
 	{

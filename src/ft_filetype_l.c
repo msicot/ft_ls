@@ -6,7 +6,7 @@
 /*   By: msicot <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/07 11:11:46 by msicot            #+#    #+#             */
-/*   Updated: 2018/03/08 18:08:36 by msicot           ###   ########.fr       */
+/*   Updated: 2018/03/09 11:36:48 by msicot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ char	*filetype(struct stat *sb)
 
 char	*acl_type(const char *path, char *s)
 {
-	acl_t   acl;
+	acl_t	acl;
 	char	buff[1024];
 	char	*str;
 

@@ -6,7 +6,7 @@
 /*   By: msicot <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/01 10:45:43 by msicot            #+#    #+#             */
-/*   Updated: 2018/03/08 16:43:40 by msicot           ###   ########.fr       */
+/*   Updated: 2018/03/09 11:44:11 by msicot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ static int	ft_num_len(int n)
 
 static void	ft_size_padd(struct s_padding *s, t_lstat l, t_dir *d, char *str)
 {
-	int i;
+	int			i;
 
 	i = ft_strlen(l.user);
 	s->u_pad = (s->u_pad > i) ? s->u_pad : i;
@@ -62,7 +62,7 @@ static void	ft_size_padd(struct s_padding *s, t_lstat l, t_dir *d, char *str)
 	}
 }
 
-static void	ft_retrieve_l(char *path, t_lstat *info, struct s_padding *pad)
+static int	ft_retrieve_l(char *path, t_lstat *info, struct s_padding *pad)
 {
 	struct stat sb;
 
@@ -71,7 +71,7 @@ static void	ft_retrieve_l(char *path, t_lstat *info, struct s_padding *pad)
 	if (lstat(path, &sb) != -1)
 	{
 		if (!(info->type = ft_strdup(filetype(&sb))))
-			return ;
+			return (0);
 		info->user = ft_strdup(u_name(&sb));
 		info->group = ft_strdup(gr_name(&sb));
 		info->perm = perm(&sb);
@@ -83,9 +83,11 @@ static void	ft_retrieve_l(char *path, t_lstat *info, struct s_padding *pad)
 		info->date = time_info(&sb);
 		pad->nb_block += sb.st_blocks;
 		info->acl = acl_type(path, info->type);
+		return (1);
 	}
 	else
 		perror(path);
+	return (0);
 }
 
 void		ft_option_l(t_name **head, t_dir *d)
@@ -99,8 +101,12 @@ void		ft_option_l(t_name **head, t_dir *d)
 	i = 0;
 	while (node != NULL)
 	{
-		i = pad.nb_block;	
-		ft_retrieve_l(node->path, &node->info, &pad);
+		i = pad.nb_block;
+		if (ft_retrieve_l(node->path, &node->info, &pad) == 0)
+		{
+			node = node->next;
+			continue ;
+		}
 		ft_linked(&node);
 		ft_size_padd(&pad, node->info, d, node->d_name);
 		if (d->a == 0 && node->d_name[0] == '.')

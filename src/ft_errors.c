@@ -6,7 +6,7 @@
 /*   By: msicot <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/19 11:41:23 by msicot            #+#    #+#             */
-/*   Updated: 2018/03/06 17:19:16 by msicot           ###   ########.fr       */
+/*   Updated: 2018/03/09 11:39:45 by msicot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	ft_error_flag(char c)
 		return ;
 	str = "[-ABCFGHLOPRSTUWabcdefghiklmnopqrstuwx1]";
 	ft_printf("ft_ls: illegal option -- %c\nusage: ls %s [file ...]\n", c, str);
-	exit (1);
+	exit(1);
 }
 
 void	ft_err_path(char *s)

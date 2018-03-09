@@ -6,7 +6,7 @@
 /*   By: msicot <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/19 11:23:52 by msicot            #+#    #+#             */
-/*   Updated: 2018/03/05 14:55:22 by msicot           ###   ########.fr       */
+/*   Updated: 2018/03/09 12:10:15 by msicot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,8 @@ static int		ft_ret_flags(t_dir *d, char c)
 		d->t = 1;
 	else if (c == '0')
 		d->un = 1;
+	else if (c == '1')
+		return (1);
 	else
 		return (0);
 	return (1);
@@ -71,6 +73,7 @@ static t_name	*ft_path_retrieve(char **tab, t_dir *d, int i)
 			return (NULL);
 		node = head;
 		d->nb_path++;
+		tmp = node;
 		while (i < d->nb_argc)
 		{
 			if ((tmp = ft_create_node(tab[i++])) == NULL)

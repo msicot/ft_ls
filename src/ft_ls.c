@@ -6,7 +6,7 @@
 /*   By: msicot <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/15 13:04:10 by msicot            #+#    #+#             */
-/*   Updated: 2018/03/06 19:08:40 by msicot           ###   ########.fr       */
+/*   Updated: 2018/03/09 13:42:16 by msicot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,7 @@ void		ft_ls_else(t_dir *d)
 	tmp = d->path;
 	while (d->path != NULL && d->path->d_name != NULL)
 	{
-		if (!(d->head = get_names2(d->path->d_name, d, d->path->d_name)))
-			return ;
+		d->head = get_names2(d->path->d_name, d, d->path->d_name);
 		if (d->nb_path > 1)
 			ft_printf("%s:\n", d->path->d_name);
 		ft_print_opt(&d->head, d);

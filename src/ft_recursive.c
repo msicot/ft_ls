@@ -6,7 +6,7 @@
 /*   By: msicot <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/20 15:30:25 by msicot            #+#    #+#             */
-/*   Updated: 2018/03/08 17:00:40 by msicot           ###   ########.fr       */
+/*   Updated: 2018/03/09 13:05:45 by msicot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,16 +48,15 @@ static int	ft_check_stat(char *path)
 
 	if (lstat(path, &sb) == -1 || (((sb.st_mode) & S_IRUSR) != 0 &&
 				((sb.st_mode) & S_IXUSR) == 0))
-		{
-			return (0);
-		}
+	{
+		return (0);
+	}
 	else if (lstat(path, &sb) == -1)
 	{
 		ft_err_perm(path);
 		return (1);
 	}
 	return (1);
-
 }
 
 static void	ft_recursive(char *path, t_dir *d)
@@ -65,15 +64,13 @@ static void	ft_recursive(char *path, t_dir *d)
 	t_name		*head;
 	t_name		*tmp;
 
-	if ((head = get_names2(path, d, path)) == NULL)
-		return ;
+	head = get_names2(path, d, path);
 	tmp = head;
 	ft_print_opt(&head, d);
 	while (tmp != NULL && tmp->d_name != NULL)
 	{
 		if (ft_is_dir(tmp->path) == 1 && ft_is_point(tmp->d_name, d) == 0)
 		{
-
 			ft_printf("\n%s:\n", tmp->path);
 			if (ft_check_stat(tmp->path) == 0)
 			{

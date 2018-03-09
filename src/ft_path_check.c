@@ -6,7 +6,7 @@
 /*   By: msicot <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/20 14:27:27 by msicot            #+#    #+#             */
-/*   Updated: 2018/03/06 17:11:25 by msicot           ###   ########.fr       */
+/*   Updated: 2018/03/09 13:36:20 by msicot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,21 +26,30 @@ void		ft_rm_files(t_dir *d)
 		{
 			if (S_ISREG(sb.st_mode))
 			{
-				ft_printf("%s\n", tmp->d_name);
+				ft_printf("%s", tmp->d_name);
 				d->path = rm_node(d->path, tmp->d_name);
 				tmp = d->path;
+				if (d->path != NULL)
+					ft_printf("\n");
 				i = 1;
 			}
 			else
 				tmp = tmp->next;
 		}
 	}
-	if (i != 0)
+	if (i != 0 && d->path != NULL)
 		ft_printf("\n");
 }
 
-static void	ft_check_dash1(t_dir *d)
+static void	ft_check_dash1(t_dir *d, char *name)
 {
+	DIR			*dir;
+	struct stat	sb;
+
+	if ((dir = opendir(name)) != NULL)
+		return ;
+	else if (lstat(name, &sb) != -1)
+		return ;
 	if (ft_strcmp(d->path->d_name, "--") == 0)
 	{
 		d->path = rm_node(d->path, d->path->d_name);
@@ -69,7 +78,7 @@ void		ft_path_check(t_dir *d)
 
 	if (d->path == NULL)
 		return ;
-	ft_check_dash1(d);
+	ft_check_dash1(d, d->path->d_name);
 	tmp = d->path;
 	while (tmp != NULL)
 	{
