@@ -6,7 +6,7 @@
 /*   By: msicot <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/12 16:07:07 by msicot            #+#    #+#             */
-/*   Updated: 2018/03/12 19:03:27 by msicot           ###   ########.fr       */
+/*   Updated: 2018/03/12 19:45:51 by msicot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ int			ft_pis_lnk(t_dir *d, t_name **node, struct stat *sb)
 			return (0);
 		ft_printf("%s\n", tmp->d_name);
 		d->path = rm_node(d->path, tmp->d_name);
-		return (0);
+		return (1);
 	}
 	ft_strdel(&tmp->info.date);
 	d->path = rm_node(d->path, tmp->d_name);

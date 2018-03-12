@@ -6,7 +6,7 @@
 /*   By: msicot <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/20 14:27:27 by msicot            #+#    #+#             */
-/*   Updated: 2018/03/12 19:01:47 by msicot           ###   ########.fr       */
+/*   Updated: 2018/03/12 19:50:57 by msicot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,4 +103,5 @@ void		ft_path_check(t_dir *d, t_name **head)
 	}
 	ft_merge_sort(&d->path, d);
 	ft_rm_files(d, &sb);
+	ft_merge_sort(&d->path, d);
 }
