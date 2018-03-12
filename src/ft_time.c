@@ -6,13 +6,13 @@
 /*   By: msicot <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/05 14:09:03 by msicot            #+#    #+#             */
-/*   Updated: 2018/03/12 11:52:25 by msicot           ###   ########.fr       */
+/*   Updated: 2018/03/12 19:04:01 by msicot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
-time_t	time_stamp(char *path)
+time_t		time_stamp(char *path)
 {
 	struct stat	sb;
 
@@ -31,7 +31,7 @@ static char	*ft_future(char **s)
 
 	str = *s;
 	if (!(yr = ft_strdup(" 10000")))
-		return (NULL);;
+		return (NULL);
 	ft_bzero(&str[7], ft_strlen(str) - 7);
 	tmp = str;
 	str = ft_strjoin(str, yr);
@@ -59,7 +59,7 @@ static char	*ft_six(char **s)
 	return (str);
 }
 
-char	*time_info(struct stat *sb)
+char		*time_info(struct stat *sb)
 {
 	char	*str;
 	time_t	now;
@@ -74,7 +74,6 @@ char	*time_info(struct stat *sb)
 	{
 		tmp = str;
 		str = ft_six(&str);
-	//	ft_strdel(&tmp);
 		return (str);
 	}
 	else if (now - sb->st_mtime < 0)

@@ -6,7 +6,7 @@
 /*   By: msicot <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/15 14:34:12 by msicot            #+#    #+#             */
-/*   Updated: 2018/03/12 12:06:03 by msicot           ###   ########.fr       */
+/*   Updated: 2018/03/12 17:09:29 by msicot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,6 +115,7 @@ void			print_list_basic(t_name *head, t_dir *d);
 void			ft_print_opt(t_name **head, t_dir *d);//, t_dir *d);
 void			ft_print_l(struct s_padding pad, t_name **head, t_dir *d,
 		int i);
+void			ft_print_file(t_dir *d, t_name **tmp2);
 void			ft_freeing(char **tab, t_dir *d);
 void			ft_ls_0(t_dir *d);
 void			ft_ls_else(t_dir *d);
@@ -122,7 +123,6 @@ void			ft_ls_gr(t_dir *d);
 int				ft_retrieve_l(char *path, t_lstat *info, struct s_padding *pad);
 void			ft_size_padd(struct s_padding *s, t_lstat l, t_dir *d, char *str);
 void			ft_path_check(t_dir *d, t_name **head);
-//void			ft_path_order(t_name **head, t_dir *d);
 void			ft_path_order(t_dir *d);
 t_name			*get_names(char *path, t_dir *d);
 t_name			*get_names2(char *path, t_dir *d, char *str);
@@ -141,4 +141,6 @@ time_t			time_stamp(char *path);
 void			ft_padd_0(struct s_padding *info);
 int				ft_total(t_name *tmp);
 void			print_it(struct s_padding pad, t_name *node);
+int				ft_pis_reg(t_dir *d, t_name **node);
+int				ft_pis_lnk(t_dir *d, t_name **node, struct stat *sb);
 #endif

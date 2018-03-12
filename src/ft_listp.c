@@ -6,7 +6,7 @@
 /*   By: msicot <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/27 10:31:39 by msicot            #+#    #+#             */
-/*   Updated: 2018/03/09 13:40:41 by msicot           ###   ########.fr       */
+/*   Updated: 2018/03/12 18:58:47 by msicot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void		ft_linked(t_name **node)
 	char		*temp;
 
 	tmp = *node;
-	if (lstat(tmp->path, &sb) == 0 && (S_ISLNK(sb.st_mode)))
+	if (lstat(tmp->path, &sb) != -1 && (S_ISLNK(sb.st_mode)))
 	{
 		temp = tmp->d_name;
 		len = readlink(tmp->path, buf, sizeof(buf) - 1);

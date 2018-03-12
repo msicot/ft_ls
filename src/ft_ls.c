@@ -6,7 +6,7 @@
 /*   By: msicot <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/15 13:04:10 by msicot            #+#    #+#             */
-/*   Updated: 2018/03/12 12:18:51 by msicot           ###   ########.fr       */
+/*   Updated: 2018/03/12 18:58:28 by msicot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,6 @@ void		ft_ls_else(t_dir *d)
 		ft_print_opt(&d->head, d);
 		if (j > 1)
 			ft_printf("\n");
-
-		//ft_strdel(&d->path->info.date);
 		d->path = d->path->next;
 		if (d->head != NULL)
 			ft_del_listp(&d->head);
@@ -49,6 +47,20 @@ static void	ft_clear_info(t_name **path)
 	{
 		ft_strdel(&tmp->info.date);
 		tmp = tmp->next;
+	}
+}
+
+void		ft_path_order(t_dir *d)
+{
+	if (d->path == NULL)
+		return ;
+	if (d->r == 0)
+		ft_merge_sort(&d->path, d);
+	else
+		ft_merge_sort_r(&d->path, d);
+	if (d->t == 1)
+	{
+		ft_merge_sort_t(&d->path, d);
 	}
 }
 

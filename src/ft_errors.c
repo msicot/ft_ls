@@ -6,7 +6,7 @@
 /*   By: msicot <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/19 11:41:23 by msicot            #+#    #+#             */
-/*   Updated: 2018/03/09 11:39:45 by msicot           ###   ########.fr       */
+/*   Updated: 2018/03/12 19:38:29 by msicot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	ft_error_flag(char c)
 	if (c == '\0')
 		return ;
 	str = "[-ABCFGHLOPRSTUWabcdefghiklmnopqrstuwx1]";
-	ft_printf("ft_ls: illegal option -- %c\nusage: ls %s [file ...]\n", c, str);
+	ft_printf("ls: illegal option -- %c\nusage: ls %s [file ...]\n", c, str);
 	exit(1);
 }
 
@@ -27,7 +27,10 @@ void	ft_err_path(char *s)
 {
 	char	*err;
 
-	err = ft_strjoin("ft_ls: ", s);
+	if (s[0] == '\0')
+		err = ft_strjoin("ls: fts_open", s);
+	else
+		err = ft_strjoin("ls: ", s);
 	perror(err);
 	ft_strdel(&err);
 }
@@ -49,7 +52,7 @@ void	ft_err_perm(char *str)
 		i++;
 	if (!(s2 = ft_strncpy(s2, &s2[i], ft_strlen(str))))
 		return ;
-	if (!(err = ft_strjoin("ft_ls: ", s2)))
+	if (!(err = ft_strjoin("ls: ", s2)))
 		return ;
 	perror(err);
 	ft_strdel(&err);

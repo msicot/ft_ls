@@ -6,7 +6,7 @@
 /*   By: msicot <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/01 10:45:43 by msicot            #+#    #+#             */
-/*   Updated: 2018/03/12 11:06:45 by msicot           ###   ########.fr       */
+/*   Updated: 2018/03/12 19:00:16 by msicot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ static int	ft_num_len(int n)
 	return (i);
 }
 
-void	ft_size_padd(struct s_padding *s, t_lstat l, t_dir *d, char *str)
+void		ft_size_padd(struct s_padding *s, t_lstat l, t_dir *d, char *str)
 {
 	int			i;
 
@@ -62,7 +62,7 @@ void	ft_size_padd(struct s_padding *s, t_lstat l, t_dir *d, char *str)
 	}
 }
 
-int	ft_retrieve_l(char *path, t_lstat *info, struct s_padding *pad)
+int			ft_retrieve_l(char *path, t_lstat *info, struct s_padding *pad)
 {
 	struct stat sb;
 

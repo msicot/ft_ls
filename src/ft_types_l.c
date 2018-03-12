@@ -6,7 +6,7 @@
 /*   By: msicot <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/01 11:17:20 by msicot            #+#    #+#             */
-/*   Updated: 2018/03/09 11:42:48 by msicot           ###   ########.fr       */
+/*   Updated: 2018/03/12 18:51:25 by msicot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,20 +50,21 @@ char	*perm(struct stat *sb)
 		return (NULL);
 	str[i++] = (sb->st_mode & S_IRUSR) ? 'r' : '-';
 	str[i++] = (sb->st_mode & S_IWUSR) ? 'w' : '-';
-	str[i++] = (sb->st_mode & S_IXUSR) ? 'x' : '-';
+	if (sb->st_mode & S_ISUID)
+		str[i++] = (sb->st_mode & S_IXUSR) ? 's' : 'S';
+	else
+		str[i++] = (sb->st_mode & S_IXUSR) ? 'x' : '-';
 	str[i++] = (sb->st_mode & S_IRGRP) ? 'r' : '-';
 	str[i++] = (sb->st_mode & S_IWGRP) ? 'w' : '-';
-	str[i++] = (sb->st_mode & S_IXGRP) ? 'x' : '-';
+	if ((sb->st_mode & S_ISGID))
+		str[i++] = (sb->st_mode & S_IXGRP) ? 's' : 'S';
+	else
+		str[i++] = (sb->st_mode & S_IXGRP) ? 'x' : '-';
 	str[i++] = (sb->st_mode & S_IROTH) ? 'r' : '-';
 	str[i++] = (sb->st_mode & S_IWOTH) ? 'w' : '-';
 	if (sb->st_mode & S_ISVTX)
-	{
-		str[i] = 't';
-		return (str);
-	}
+		str[i] = (sb->st_mode & S_IXOTH) ? 't' : 'T';
 	else
-		str[i] = '-';
-	if (sb->st_mode & S_IXOTH)
-		str[i] = 'x';
+		str[i] = (sb->st_mode & S_IXOTH) ? 'x' : '-';
 	return (str);
 }
