@@ -6,7 +6,7 @@
 /*   By: msicot <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/20 15:30:25 by msicot            #+#    #+#             */
-/*   Updated: 2018/03/09 13:05:45 by msicot           ###   ########.fr       */
+/*   Updated: 2018/03/12 09:40:55 by msicot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,8 @@ void		ft_ls_gr(t_dir *d)
 			ft_printf("%s:\n", tmp->d_name);
 		ft_recursive(tmp->d_name, d);
 		tmp = tmp->next;
+		if (i > 1)
+			ft_printf("\n");
 		--i;
 	}
 	if (d->path != NULL)

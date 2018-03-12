@@ -6,13 +6,13 @@
 /*   By: msicot <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/28 18:19:05 by msicot            #+#    #+#             */
-/*   Updated: 2018/03/09 13:40:10 by msicot           ###   ########.fr       */
+/*   Updated: 2018/03/12 11:21:27 by msicot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
-static void	print_it(struct s_padding pad, t_name *node)
+void	print_it(struct s_padding pad, t_name *node)
 {
 	ft_printf("%s%s%s ", node->info.type, node->info.perm, node->info.acl);
 	ft_printf("%*d %-*s  %-*s  ", pad.ln_pad, node->info.nb_l, pad.u_pad,

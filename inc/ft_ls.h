@@ -6,7 +6,7 @@
 /*   By: msicot <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/15 14:34:12 by msicot            #+#    #+#             */
-/*   Updated: 2018/03/08 15:11:32 by msicot           ###   ########.fr       */
+/*   Updated: 2018/03/12 12:06:03 by msicot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,7 +119,9 @@ void			ft_freeing(char **tab, t_dir *d);
 void			ft_ls_0(t_dir *d);
 void			ft_ls_else(t_dir *d);
 void			ft_ls_gr(t_dir *d);
-void			ft_path_check(t_dir *d);
+int				ft_retrieve_l(char *path, t_lstat *info, struct s_padding *pad);
+void			ft_size_padd(struct s_padding *s, t_lstat l, t_dir *d, char *str);
+void			ft_path_check(t_dir *d, t_name **head);
 //void			ft_path_order(t_name **head, t_dir *d);
 void			ft_path_order(t_dir *d);
 t_name			*get_names(char *path, t_dir *d);
@@ -138,4 +140,5 @@ char			*time_info(struct stat *sb);
 time_t			time_stamp(char *path);
 void			ft_padd_0(struct s_padding *info);
 int				ft_total(t_name *tmp);
+void			print_it(struct s_padding pad, t_name *node);
 #endif

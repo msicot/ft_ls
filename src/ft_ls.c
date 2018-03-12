@@ -6,7 +6,7 @@
 /*   By: msicot <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/15 13:04:10 by msicot            #+#    #+#             */
-/*   Updated: 2018/03/09 13:42:16 by msicot           ###   ########.fr       */
+/*   Updated: 2018/03/12 12:18:51 by msicot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ void		ft_ls_else(t_dir *d)
 		ft_print_opt(&d->head, d);
 		if (j > 1)
 			ft_printf("\n");
+
+		//ft_strdel(&d->path->info.date);
 		d->path = d->path->next;
 		if (d->head != NULL)
 			ft_del_listp(&d->head);
@@ -63,7 +65,7 @@ int			main(int argc, char **argv)
 	else
 	{
 		ft_flags(argv, &d);
-		ft_path_check(&d);
+		ft_path_check(&d, &d.path);
 		ft_path_order(&d);
 		ft_clear_info(&d.path);
 		if (d.R == 1)

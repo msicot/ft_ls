@@ -6,11 +6,27 @@
 /*   By: msicot <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/20 14:27:27 by msicot            #+#    #+#             */
-/*   Updated: 2018/03/09 13:36:20 by msicot           ###   ########.fr       */
+/*   Updated: 2018/03/12 13:32:58 by msicot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
+
+static void ft_print_file(t_dir *d, t_name **tmp2)
+{
+	struct s_padding	pad;
+//	int					i;
+	t_name	*tmp;
+
+	tmp = *tmp2;
+	ft_padd_0(&pad);
+//	tmp->next = NULL;
+	if (ft_retrieve_l(tmp->d_name, &tmp->info, &pad) == 0)
+		return;
+	ft_size_padd(&pad, tmp->info, d, tmp->d_name);
+	print_it(pad, tmp);
+	ft_del_info(&tmp->info);
+}
 
 void		ft_rm_files(t_dir *d)
 {
@@ -26,7 +42,11 @@ void		ft_rm_files(t_dir *d)
 		{
 			if (S_ISREG(sb.st_mode))
 			{
-				ft_printf("%s", tmp->d_name);
+				if (d->l == 1)
+					ft_print_file(d, &tmp);
+				else
+					ft_printf("%s", tmp->d_name);
+				ft_strdel(&tmp->info.date);
 				d->path = rm_node(d->path, tmp->d_name);
 				tmp = d->path;
 				if (d->path != NULL)
@@ -47,7 +67,10 @@ static void	ft_check_dash1(t_dir *d, char *name)
 	struct stat	sb;
 
 	if ((dir = opendir(name)) != NULL)
+	{
+		closedir(dir);
 		return ;
+	}
 	else if (lstat(name, &sb) != -1)
 		return ;
 	if (ft_strcmp(d->path->d_name, "--") == 0)
@@ -71,7 +94,7 @@ void		ft_path_order(t_dir *d)
 	}
 }
 
-void		ft_path_check(t_dir *d)
+void		ft_path_check(t_dir *d, t_name **head)
 {
 	struct stat	sb;
 	t_name		*tmp;
@@ -79,10 +102,10 @@ void		ft_path_check(t_dir *d)
 	if (d->path == NULL)
 		return ;
 	ft_check_dash1(d, d->path->d_name);
-	tmp = d->path;
+	tmp = *head;
 	while (tmp != NULL)
 	{
-		if (lstat(tmp->d_name, &sb) == 0)
+		if (lstat(tmp->d_name, &sb) != -1)
 		{
 			tmp->info.date = time_info(&sb);
 			tmp = tmp->next;
