@@ -6,7 +6,7 @@
 /*   By: msicot <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/20 14:27:27 by msicot            #+#    #+#             */
-/*   Updated: 2018/03/12 19:50:57 by msicot           ###   ########.fr       */
+/*   Updated: 2018/03/13 17:38:50 by msicot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ void		ft_path_check(t_dir *d, t_name **head)
 		if (lstat(tmp->d_name, &sb) != -1)
 		{
 			if (d->t == 1)
-				tmp->info.date = time_info(&sb);
+				tmp->ts = time_stamp(tmp->d_name);
 			tmp = tmp->next;
 		}
 		else
@@ -101,7 +101,6 @@ void		ft_path_check(t_dir *d, t_name **head)
 			tmp = d->path;
 		}
 	}
-	ft_merge_sort(&d->path, d);
+	ft_path_order(d);
 	ft_rm_files(d, &sb);
-	ft_merge_sort(&d->path, d);
 }
