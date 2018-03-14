@@ -6,7 +6,7 @@
 /*   By: msicot <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/15 14:34:12 by msicot            #+#    #+#             */
-/*   Updated: 2018/03/14 11:53:03 by msicot           ###   ########.fr       */
+/*   Updated: 2018/03/14 12:22:44 by msicot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,6 @@ typedef struct	s_dir
 	int		a;
 	int		r;
 	int		t;
-	int		d2;
 	int		un;
 	int		flags;
 	int		minus;
