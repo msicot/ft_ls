@@ -6,7 +6,7 @@
 /*   By: msicot <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/01 11:17:20 by msicot            #+#    #+#             */
-/*   Updated: 2018/03/14 12:03:39 by msicot           ###   ########.fr       */
+/*   Updated: 2018/03/20 11:26:29 by msicot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,15 @@ char	*u_name(struct stat *sb)
 char	*gr_name(struct stat *sb)
 {
 	struct group	*gr;
+	char			*str;
 
-	if ((gr = getgrgid(sb->st_gid)) == NULL)
-		return (NULL);
-	return (gr->gr_name);
+	str = NULL;
+	if ((gr = getgrgid(sb->st_gid)) != NULL)
+		str = ft_strdup(gr->gr_name);
+	else
+		str = ft_itoa(sb->st_gid);
+	return (str);
+
 }
 
 void	get_majmin(struct stat *sb, t_lstat **info)

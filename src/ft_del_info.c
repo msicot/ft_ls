@@ -6,7 +6,7 @@
 /*   By: msicot <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/02 12:21:35 by msicot            #+#    #+#             */
-/*   Updated: 2018/03/08 17:17:41 by msicot           ###   ########.fr       */
+/*   Updated: 2018/03/20 11:20:24 by msicot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,3 +24,14 @@ void	ft_del_info(t_lstat *info)
 		ft_strdel(&info->acl);
 	}
 }
+
+void	ft_set_info(t_lstat *info)
+{
+		info->type = NULL;
+		info->user = NULL;
+		info->group = NULL;
+		info->date = NULL;
+		info->perm = NULL;
+		info->acl = NULL;
+}
+

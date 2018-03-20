@@ -6,7 +6,7 @@
 /*   By: msicot <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/20 15:30:25 by msicot            #+#    #+#             */
-/*   Updated: 2018/03/12 09:40:55 by msicot           ###   ########.fr       */
+/*   Updated: 2018/03/20 12:32:43 by msicot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,9 +48,7 @@ static int	ft_check_stat(char *path)
 
 	if (lstat(path, &sb) == -1 || (((sb.st_mode) & S_IRUSR) != 0 &&
 				((sb.st_mode) & S_IXUSR) == 0))
-	{
 		return (0);
-	}
 	else if (lstat(path, &sb) == -1)
 	{
 		ft_err_perm(path);

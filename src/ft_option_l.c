@@ -6,7 +6,7 @@
 /*   By: msicot <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/01 10:45:43 by msicot            #+#    #+#             */
-/*   Updated: 2018/03/14 11:52:26 by msicot           ###   ########.fr       */
+/*   Updated: 2018/03/20 13:16:57 by msicot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ int			ft_retrieve_l(char *path, t_lstat *info, struct s_padding *pad)
 		if (!(info->type = ft_strdup(filetype(&sb))))
 			return (0);
 		info->user = u_name(&sb);
-		info->group = ft_strdup(gr_name(&sb));
+		info->group = gr_name(&sb);
 		info->perm = perm(&sb);
 		info->nb_l = sb.st_nlink;
 		if (ft_strcmp("b", info->type) != 0 && ft_strcmp("c", info->type) != 0)
