@@ -6,7 +6,7 @@
 /*   By: msicot <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/15 14:34:12 by msicot            #+#    #+#             */
-/*   Updated: 2018/03/14 12:22:44 by msicot           ###   ########.fr       */
+/*   Updated: 2018/03/20 09:43:55 by msicot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,7 @@ t_name			*ft_create_node(char *str);
 void			ft_del_list(t_name **head);
 void			ft_del_listp(t_name **head);
 void			ft_del_info(t_lstat *info);
+void			ft_set_info(t_lstat *info);
 void			ft_flags(char **tab, t_dir *d);
 void			ft_error_flag(char c);
 void			ft_err_path(char *s);

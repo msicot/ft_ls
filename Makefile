@@ -6,7 +6,7 @@
 #    By: msicot <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/08 14:13:34 by msicot            #+#    #+#              #
-#    Updated: 2018/03/13 18:01:08 by msicot           ###   ########.fr        #
+#    Updated: 2018/03/20 11:43:53 by msicot           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,6 +24,7 @@ cleaning = @echo "LS building...\n\033[92mCleaning complete\033[0m"
 
 
 CC = gcc
+FF = -fsanitize=address
 CFLAGS = -Werror -Wextra -Wall
 NAME = ft_ls
 		
@@ -35,7 +36,7 @@ all: $(NAME)
 
 $(NAME): $(OBJ)
 	@make -C ./libft
-	@gcc -Wextra -Werror -Wall $(OBJ) -L./libft/ -lft -o $(LS_NAME)
+	@gcc $(CFLGAS) $(OBJ) -L./libft/ -lft -o $(LS_NAME)
 	$(complete)
 
 $(OBJ_PATH)%.o: $(SRC_PATH)%.c
