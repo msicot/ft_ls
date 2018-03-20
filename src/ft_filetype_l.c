@@ -6,7 +6,7 @@
 /*   By: msicot <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/07 11:11:46 by msicot            #+#    #+#             */
-/*   Updated: 2018/03/14 11:55:39 by msicot           ###   ########.fr       */
+/*   Updated: 2018/03/20 14:47:35 by msicot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,6 @@ char	*acl_type(const char *path, char *s)
 			str[0] = '+';
 		acl_free((void *)acl);
 		acl = NULL;
-	//	return (str);
 	}
 	if (listxattr(path, buff, 1024, XATTR_NOFOLLOW) > 0)
 		str[0] = '@';

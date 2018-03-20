@@ -6,7 +6,7 @@
 /*   By: msicot <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/02 12:21:35 by msicot            #+#    #+#             */
-/*   Updated: 2018/03/20 11:20:24 by msicot           ###   ########.fr       */
+/*   Updated: 2018/03/20 14:49:35 by msicot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,10 @@ void	ft_del_info(t_lstat *info)
 
 void	ft_set_info(t_lstat *info)
 {
-		info->type = NULL;
-		info->user = NULL;
-		info->group = NULL;
-		info->date = NULL;
-		info->perm = NULL;
-		info->acl = NULL;
+	info->type = NULL;
+	info->user = NULL;
+	info->group = NULL;
+	info->date = NULL;
+	info->perm = NULL;
+	info->acl = NULL;
 }
-

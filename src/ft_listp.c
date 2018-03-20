@@ -6,7 +6,7 @@
 /*   By: msicot <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/27 10:31:39 by msicot            #+#    #+#             */
-/*   Updated: 2018/03/20 12:18:14 by msicot           ###   ########.fr       */
+/*   Updated: 2018/03/20 14:50:00 by msicot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,11 +66,6 @@ static void	ft_path_name(t_name **node, char *path)
 	tmp = *node;
 	while (tmp != NULL)
 	{
-	/*	tmp2= ft_strjoin(path, slash);
-		free(tmp->path);
-		tmp->path = ft_strdup(tmp2);
-		free(tmp2);
-		*/
 		tmp->path = ft_strjoin(path, slash);
 		bin = tmp->path;
 		tmp->path = ft_strjoin(tmp->path, tmp->d_name);
